@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* banner slider  */
+.slider {
+  height: 75vh !important;
+}
+.thumbs {
+  display: flex;
+  justify-content: center;
+}
+
+.thumb img {
+  width: 100px !important;
+  height: 50px !important;
+}
