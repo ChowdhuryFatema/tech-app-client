@@ -8,12 +8,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from "react-toastify";
 import BannerBtn from "../../components/BannerBtn";
 import Navbar from "../../Shared/Navbar";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const SignUp = () => {
 
     const [showPassword, setShowPassword] = useState(false)
     const { createUser, updateUserProfile, logOutUser } = useContext(AuthContext);
+    const axiosPublic = useAxiosPublic();
 
     const navigate = useNavigate()
 
@@ -42,15 +44,25 @@ const SignUp = () => {
                 console.log(result);
 
                 logOutUser();
-                navigate('/login');
 
-                Swal.fire({
-                    text: "User Created Successfully!",
-                    icon: "success"
-                });
-                e.target.reset();
 
-                updateUserProfile(name, photo);
+                const userInfo = {
+                    name,
+                    photo,
+                    email,
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(data => {
+                        if (data.data.insertedId) {
+                            navigate('/login')
+                            Swal.fire({
+                                text: "User Created Successfully!",
+                                icon: "success"
+                            });
+                            e.target.reset()
+                            updateUserProfile(name, photo)
+                        }
+                    })
 
             })
             .catch(error => {

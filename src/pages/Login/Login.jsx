@@ -6,6 +6,7 @@ import { LuEye, LuEyeOff } from "react-icons/lu";
 import Swal from "sweetalert2";
 import Navbar from "../../Shared/Navbar";
 import BannerBtn from "../../components/BannerBtn";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
 
@@ -13,6 +14,7 @@ const Login = () => {
     const { signInUser, googleLogin, gitHubLogin } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
     const {
         register,
@@ -48,7 +50,18 @@ const Login = () => {
         socialProvider()
             .then(result => {
                 console.log(result)
-                navigate(location?.state || '/')
+                navigate(location?.state || '/');
+
+                const userInfo = {
+                    name: result.user.displayName,
+                    email: result.user.email,
+                }
+
+                axiosPublic.post('/users', userInfo)
+                .then(res => {
+                    console.log(res.data);
+                })
+
             })
             .catch(error => {
                 console.log(error)
