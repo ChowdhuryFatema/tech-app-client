@@ -9,6 +9,8 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import MyProducts from "../pages/Dashboard/users/MyProducts/MyProducts";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import ProductReview from "../pages/Dashboard/Moderator/ProductReview/ProductReview";
+import AddProducts from "../pages/Dashboard/users/AddProduct/AddProducts";
 
 const router = createBrowserRouter([
     {
@@ -39,8 +41,18 @@ const router = createBrowserRouter([
           path: 'myProducts',
           element: <MyProducts></MyProducts>
         },
+        {
+          path: 'addProduct',
+          element: <AddProducts></AddProducts>
+        },
 
-        // Admin 
+        // moderator route
+        {
+          path: 'productReview',
+          element: <ProductReview></ProductReview>
+        },
+
+        // Admin route
         {
           path: 'manageUsers',
           element: <ManageUsers></ManageUsers>

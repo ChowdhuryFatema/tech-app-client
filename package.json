@@ -24,6 +24,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.23.1",
     "react-spinners": "^0.13.8",
+    "react-tag-input": "^6.10.2",
     "react-toastify": "^10.0.5",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.11.0"

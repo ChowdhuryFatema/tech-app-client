@@ -1,10 +1,12 @@
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
 import useAuth from "../../Hooks/useAuth";
+import useModerator from "../../Hooks/useModerator";
 
 const Dashboard = () => {
 
     const [isAdmin] = useAdmin();
+    const [isModerator] = useModerator();
     const { user } = useAuth();
 
     return (
@@ -32,12 +34,18 @@ const Dashboard = () => {
                         {/* Sidebar content here */}
 
                         {
-                            user && !isAdmin && <>
+                            user && !isAdmin && !isModerator && <>
 
-                                <NavLink to="/myProfile">My Profile</NavLink>
-                                <NavLink to="/addProduct">Add Product</NavLink>
-                                <NavLink to="/myProducts">My Products</NavLink>
+                                <NavLink to="/dashboard/myProfile">My Profile</NavLink>
+                                <NavLink to="/dashboard/addProduct">Add Product</NavLink>
+                                <NavLink to="/dashboard/myProducts">My Products</NavLink>
 
+                            </>
+                        }
+
+                        {
+                            isModerator && !isAdmin && <>
+                                <NavLink to="/dashboard/productReview">Product Review Queue</NavLink>
                             </>
                         }
 
