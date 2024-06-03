@@ -6,7 +6,7 @@ import useAuth from "./useAuth";
 const useProducts = () => {
     const axiosSecure = useAxiosSecure();
     const {user, loading} = useAuth();
-    const {data:products=[]} = useQuery({
+    const {data:products=[], refetch} = useQuery({
         queryKey: ['products', user?.email],
         enabled: !loading,
         queryFn: async() => {
@@ -15,7 +15,7 @@ const useProducts = () => {
         }
     })
 
-    return {products}
+    return {products, refetch}
 };
 
 export default useProducts;

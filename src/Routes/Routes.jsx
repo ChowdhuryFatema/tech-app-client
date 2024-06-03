@@ -11,6 +11,7 @@ import MyProducts from "../pages/Dashboard/users/MyProducts/MyProducts";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import ProductReview from "../pages/Dashboard/Moderator/ProductReview/ProductReview";
 import AddProducts from "../pages/Dashboard/users/AddProduct/AddProducts";
+import ProductDetails from "../pages/ProductDetails/ProductDetails";
 
 const router = createBrowserRouter([
     {
@@ -30,7 +31,10 @@ const router = createBrowserRouter([
           path: '/signUp',
           element: <SignUp></SignUp>
         },
-  
+        {
+          path: '/product/:id',
+          element: <ProductDetails></ProductDetails>
+        },
       ],
     },
     {

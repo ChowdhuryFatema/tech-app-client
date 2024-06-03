@@ -3,32 +3,13 @@ import { FcAcceptDatabase } from "react-icons/fc";
 import { MdBlockFlipped } from "react-icons/md";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 
 const ProductReview = () => {
 
-    const { products } = useProducts();
+    const { products, refetch } = useProducts();
     const axiosPublic = useAxiosPublic();
-
-
-    const handleAcceptProducts = id => {
-
-        axiosPublic.get(`/products/${id}`)
-            .then(data => {
-                axiosPublic.post('/allProducts', data.data)
-                    .then(data => {
-                        console.log(data.data);
-                        if (data.data.insertedId) {
-                            Swal.fire({
-                                icon: "success",
-                                title: "Successfully Added",
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        }
-                    })
-            })
-    }
 
 
     const handleMakeFeatured = id => {
@@ -47,6 +28,62 @@ const ProductReview = () => {
                         }
                     })
             })
+    }
+
+
+
+    const handleAcceptProduct = (id, status) => {
+
+        axiosPublic.put(`/products/${id}`, { status })
+            .then(data => {
+                if (data.data.modifiedCount > 0) {
+                    axiosPublic.get(`/products/${id}`)
+                        .then(data => {
+                            axiosPublic.post('/allProducts', data.data)
+                                .then(data => {
+                                    console.log(data.data);
+                                    if (data.data.insertedId) {
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "Product Accepted",
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
+                                    }
+                                })
+
+                        })
+                        refetch();
+                }
+            })
+
+    }
+
+
+    
+    const handleRejectedProduct = (id, status) => {
+
+
+        axiosPublic.put(`/products/${id}`, { status })
+            .then(data => {
+                console.log(data.data);
+                if (data.data.modifiedCount > 0) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Product Rejected",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    refetch();
+                }
+
+                axiosPublic.delete(`/allProducts/${id}`)
+                .then(data => {
+                    console.log(data.data);
+                })
+                
+            })
+        
     }
 
     return (
@@ -86,7 +123,7 @@ const ProductReview = () => {
                                 </td>
                                 <td>
                                     <button className="btn btn-sm bg-red-100 text-red-600">
-                                        View Details
+                                       <Link to={`/product/${product._id}`}>View Details</Link>
                                     </button>
                                 </td>
                                 <td>
@@ -95,12 +132,12 @@ const ProductReview = () => {
                                     </button>
                                 </td>
                                 <td>
-                                    <button onClick={() => handleAcceptProducts(product._id)} className="btn">
+                                    <button disabled={product.status === 'Accepted'} onClick={() => handleAcceptProduct(product._id, "Accepted")} className="btn">
                                         <FcAcceptDatabase size={20} />
                                     </button>
                                 </td>
                                 <td>
-                                    <button className="btn">
+                                    <button disabled={product.status === 'Rejected'} onClick={() => handleRejectedProduct(product._id, "Rejected")} className="btn">
                                         <MdBlockFlipped size={20} />
                                     </button>
                                 </td>
