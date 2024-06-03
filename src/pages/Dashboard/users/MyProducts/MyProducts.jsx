@@ -7,8 +7,8 @@ const MyProducts = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
 
-    const { data: myProducts } = useQuery({
-        queryKey: ['myProducts'],
+    const { data: myProducts=[] } = useQuery({
+        queryKey: ['myProduct'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/product/${user?.email}`)
             return res.data
@@ -34,7 +34,7 @@ const MyProducts = () => {
                         myProducts.map(myProduct => <tr key={myProduct._id}>
                             <th>1</th>
                             <td>{myProduct.name}</td>
-                            <td>{myProduct}</td>
+                            <td></td>
                             <td>Blue</td>
                         </tr>)
                        }
