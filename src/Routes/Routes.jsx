@@ -12,6 +12,8 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import ProductReview from "../pages/Dashboard/Moderator/ProductReview/ProductReview";
 import AddProducts from "../pages/Dashboard/users/AddProduct/AddProducts";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
+import ReportedProducts from "../pages/Dashboard/Moderator/ProductReview/ReportedProducts/ReportedProducts";
+import Products from "../pages/Products/Products";
 
 const router = createBrowserRouter([
     {
@@ -32,8 +34,12 @@ const router = createBrowserRouter([
           element: <SignUp></SignUp>
         },
         {
-          path: '/product/:id',
-          element: <ProductDetails></ProductDetails>
+          path: '/products',
+          element: <Products></Products>
+        },
+        {
+          path: '/productDetails/:id',
+          element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
         },
       ],
     },
@@ -54,6 +60,10 @@ const router = createBrowserRouter([
         {
           path: 'productReview',
           element: <ProductReview></ProductReview>
+        },
+        {
+          path: 'reportedProducts',
+          element: <ReportedProducts></ReportedProducts>
         },
 
         // Admin route

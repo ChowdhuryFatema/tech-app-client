@@ -46,6 +46,7 @@ const Dashboard = () => {
                         {
                             isModerator && !isAdmin && <>
                                 <NavLink to="/dashboard/productReview">Product Review Queue</NavLink>
+                                <NavLink to="/dashboard/reportedProducts"> Reported Contents</NavLink>
                             </>
                         }
 

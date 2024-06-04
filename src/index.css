@@ -197,3 +197,49 @@ span.ReactTags__tag {
 
 
 /* react input tags css ends  */
+
+
+/* card css */
+
+.top-corner::after {
+  content: "";
+  position: absolute;
+  width: 41px;
+  height: 30%;
+  left: 0;
+  top: 0;
+  border-top: 2px solid #0ae0b8;
+  border-left: 2px solid #0ae0b8;
+}
+.top-corner::before {
+  content: "";
+  position: absolute;
+  width: 41px;
+  height: 30%;
+  right: 0;
+  top: 0;
+  border-top: 2px solid #0ae0b8;
+  border-right: 2px solid #0ae0b8;
+}
+.bottom-corner::after {
+  content: "";
+  position: absolute;
+  width: 41px;
+  height: 30%;
+  left: 0;
+  bottom: 0;
+  border-bottom: 2px solid #0ae0b8;
+  border-left: 2px solid #0ae0b8;
+}
+
+
+.bottom-corner::before {
+  content: "";
+  position: absolute;
+  width: 41px;
+  height: 30%;
+  right: 0;
+  bottom: 0;
+  border-bottom: 2px solid #0ae0b8;
+  border-right: 2px solid #0ae0b8;
+}

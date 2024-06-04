@@ -123,7 +123,7 @@ const ProductReview = () => {
                                 </td>
                                 <td>
                                     <button className="btn btn-sm bg-red-100 text-red-600">
-                                       <Link to={`/product/${product._id}`}>View Details</Link>
+                                       <Link to={`/productDetails/${product._id}`}>View Details</Link>
                                     </button>
                                 </td>
                                 <td>
