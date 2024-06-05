@@ -70,7 +70,8 @@ const Products = ({ itemsPerPage = 6 }) => {
                     currentItems.map((product) => (
                         <ProductCard
                             key={product._id}
-                            product={product}></ProductCard>
+                            product={product}
+                            refetch={refetch}></ProductCard>
                     ))}
             </div>
 

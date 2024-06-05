@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import useAxiosPublic from "../../../../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 
 const ReportedProducts = () => {
@@ -18,11 +19,31 @@ const ReportedProducts = () => {
     })
 
     const handleDeleteReport = id => {
-        axiosPublic.delete(`/reportedProduct/${id}`)
-        .then(data => {
-            console.log(data.data);
-            refetch()
-        })
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosPublic.delete(`/reportedProduct/${id}`)
+                    .then(data => {
+                        console.log(data.data);
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Reported Product has been deleted.",
+                            icon: "success"
+                        });
+                        refetch()
+                    })
+
+            }
+        });
     }
 
 
@@ -41,24 +62,24 @@ const ReportedProducts = () => {
                     </thead>
                     <tbody>
                         {
-                            reportedProducts.map((reportedProduct, idx) => <tr 
-                            key={reportedProduct._id}>
+                            reportedProducts.map((reportedProduct, idx) => <tr
+                                key={reportedProduct._id}>
                                 <th>{idx + 1}</th>
                                 <td>{reportedProduct.name}</td>
                                 <td>
                                     <button className="btn btn-sm bg-red-100 text-red-600">
-                                       <Link to={`/productDetails/${reportedProduct._id}`}>View Details</Link>
+                                        <Link to={`/productDetails/${reportedProduct._id}`}>View Details</Link>
                                     </button>
                                 </td>
                                 <td>
                                     <button onClick={() => handleDeleteReport(reportedProduct._id)} >
                                         <MdDeleteForever size={24} className="text-red-500" />
                                     </button>
-                                    
+
                                 </td>
                             </tr>)
                         }
-                       
+
                     </tbody>
                 </table>
             </div>

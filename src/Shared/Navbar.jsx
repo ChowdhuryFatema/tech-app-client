@@ -86,7 +86,9 @@ const Navbar = ({ color, bgColor }) => {
                                                 {user?.displayName && user?.displayName}
                                             </a>
                                         </li>
-                                        <Link to="/dashboard/myProducts">Dashboard</Link>
+                                        <li>
+                                            <Link to="/dashboard/myProducts">Dashboard</Link>
+                                        </li>
                                         <li onClick={handleLogOut}><a className="py-2">Logout</a></li>
                                     </ul>
                                 </div>

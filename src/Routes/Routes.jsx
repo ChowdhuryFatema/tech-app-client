@@ -14,6 +14,8 @@ import AddProducts from "../pages/Dashboard/users/AddProduct/AddProducts";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import ReportedProducts from "../pages/Dashboard/Moderator/ProductReview/ReportedProducts/ReportedProducts";
 import Products from "../pages/Products/Products";
+import Update from "../pages/Dashboard/users/MyProducts/Update";
+import MyProfile from "../pages/Dashboard/users/MyProfile/MyProfile";
 
 const router = createBrowserRouter([
     {
@@ -36,7 +38,7 @@ const router = createBrowserRouter([
         {
           path: '/products',
           element: <Products></Products>
-        },
+        },        
         {
           path: '/productDetails/:id',
           element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
@@ -48,12 +50,21 @@ const router = createBrowserRouter([
       element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children: [
         {
+          path: 'myProfile',
+          element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>
+        },
+        {
           path: 'myProducts',
-          element: <MyProducts></MyProducts>
+          element: <PrivateRoute><MyProducts></MyProducts></PrivateRoute>
         },
         {
           path: 'addProduct',
-          element: <AddProducts></AddProducts>
+          element: <PrivateRoute><AddProducts></AddProducts></PrivateRoute>
+        },
+        {
+          path: 'update/:id',
+          element: <PrivateRoute><Update></Update></PrivateRoute>,
+          loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/products/${params.id}`)
         },
 
         // moderator route

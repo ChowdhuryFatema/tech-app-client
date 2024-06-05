@@ -5,7 +5,7 @@ import FeaturedCard from "./FeaturedCard";
 const FeaturedProducts = () => {
     const axiosPublic = useAxiosPublic();
 
-    const { data: features = [] } = useQuery({
+    const { data: features = [], refetch } = useQuery({
         queryKey: ['features'],
         queryFn: async () => {
             const res = await axiosPublic.get('/featured')
@@ -22,6 +22,7 @@ const FeaturedProducts = () => {
                         features.map(feature => <FeaturedCard
                             key={feature._id}
                             feature={feature}
+                            refetch={refetch}
                         ></FeaturedCard>)
 
                     }

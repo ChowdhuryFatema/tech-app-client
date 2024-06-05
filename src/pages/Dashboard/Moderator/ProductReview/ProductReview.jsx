@@ -138,7 +138,7 @@ const ProductReview = () => {
                                 </td>
                                 <td>
                                     <button disabled={product.status === 'Rejected'} onClick={() => handleRejectedProduct(product._id, "Rejected")} className="btn">
-                                        <MdBlockFlipped size={20} />
+                                        <MdBlockFlipped size={20} className="text-red-500"/>
                                     </button>
                                 </td>
                             </tr>)

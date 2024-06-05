@@ -1,11 +1,24 @@
 import { BiSolidUpArrow } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
 import PropTypes from 'prop-types';
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
-const ProductCard = ({ product }) => {
-    const { name, image, upvotes, tags, email } = product;
+const ProductCard = ({ product, refetch }) => {
+    const { _id, name, image, upvotes, tags, email } = product;
     const { user } = useAuth();
+
+    const axiosPublic = useAxiosPublic()
+
+    const handleUpvotes = id => {
+        console.log(id);
+        axiosPublic.patch(`/allProducts/${id}`)
+        .then(data => {
+            console.log(data);
+            refetch();
+        })
+    }
+
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
             <figure className="px-10 pt-10">
@@ -22,7 +35,7 @@ const ProductCard = ({ product }) => {
                 </ul>
 
                 <div className="card-actions">
-                    <button className="flex btn flex-col justify-center border border-[#0ae0b8] bg-transparent items-center" disabled={user?.email == email}>
+                    <button onClick={() => handleUpvotes(_id)}  className="flex btn flex-col justify-center border border-[#0ae0b8] bg-transparent items-center" disabled={user?.email == email}>
                         <BiSolidUpArrow size={20} className='text-[#0ae0b8]' />
                         <span className='-mt-1'>{upvotes}</span>
                     </button>
@@ -34,5 +47,6 @@ const ProductCard = ({ product }) => {
 
 ProductCard.propTypes = {
     product: PropTypes.object,
+    refetch: PropTypes.func
 }
 export default ProductCard;
