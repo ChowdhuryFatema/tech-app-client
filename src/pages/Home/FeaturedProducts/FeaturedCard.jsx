@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { BiSolidUpArrow } from "react-icons/bi";
 import useAuth from '../../../Hooks/useAuth';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 const FeaturedCard = ({ feature, refetch }) => {
     const { user } = useAuth()
@@ -10,9 +11,13 @@ const FeaturedCard = ({ feature, refetch }) => {
 
     const handleUpvotes = id => {
         console.log(id);
-        axiosPublic.patch(`/featured/${id}`)
+
+        axiosPublic.patch(`/featured/${id}`, {upVote: user?.email})
         .then(data => {
             console.log(data);
+            if (data.data.modifiedCount !== 1) {
+                Swal.fire("Upvote Already Added");
+            }
             refetch();
         })
     }

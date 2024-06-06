@@ -12,27 +12,30 @@ body {
 }
 
 /* navbar start */
-
+.active {
+  background-color: transparent !important;
+}
 .active::after {
-	  content: "";
-    position: absolute;
-    width: 13px;
-    height: 30%;
-    left: 0;
-    top: 0;
-    border-top: 2px solid #0ae0b8;
-    border-left: 2px solid #0ae0b8;
-	}
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 30%;
+  left: 0;
+  top: 0;
+  border-top: 2px solid #0ae0b8;
+  border-left: 2px solid #0ae0b8;
+}
+
 .active::before {
-	  content: "";
-    position: absolute;
-    width: 13px;
-    height: 30%;
-    right: 0;
-    bottom: 0;
-    border-bottom: 2px solid #0ae0b8;
-    border-right: 2px solid #0ae0b8;
-	}
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 30%;
+  right: 0;
+  bottom: 0;
+  border-bottom: 2px solid #0ae0b8;
+  border-right: 2px solid #0ae0b8;
+}
 
 /* navbar end */
 
@@ -40,6 +43,7 @@ body {
 .slider img {
   height: 85vh !important;
 }
+
 .thumbs {
   display: flex;
   justify-content: center;
@@ -64,7 +68,7 @@ body {
 /* react input tags css starts  */
 .ReactTags__tags {
   position: relative;
- 
+
 }
 
 .ReactTags__clearAll {
@@ -77,11 +81,12 @@ body {
 }
 
 .ReactTags__tagInput {
-  
+
   display: inline-block;
   width: 100% !important;
-  
+
 }
+
 .ReactTags__tagInput input {
   border-radius: 5px;
   font-family: "Poppins", sans-serif;
@@ -121,6 +126,7 @@ input.ReactTags__tagInputField {
   margin-bottom: 10px;
 
 }
+
 span.ReactTags__tag {
   border: 1px solid #ddd;
   background: #0ae0b8;
@@ -143,7 +149,7 @@ span.ReactTags__tag {
   position: absolute;
 }
 
-.ReactTags__suggestions >  ul {
+.ReactTags__suggestions>ul {
   list-style-type: none;
   box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.2);
   background: white;
@@ -151,7 +157,7 @@ span.ReactTags__tag {
   padding: 5px 0;
 }
 
-.ReactTags__suggestions > li {
+.ReactTags__suggestions>li {
   padding: 5px 10px;
   margin: 0;
   text-align: left;
@@ -188,10 +194,10 @@ span.ReactTags__tag {
   align-items: center;
   justify-content: center;
 
-  
+
 }
 
-.ReactTags__error > svg {
+.ReactTags__error>svg {
   padding: 0 5px;
 }
 
@@ -206,12 +212,42 @@ span.ReactTags__tag {
   justify-content: center;
   align-items: center;
 }
+
 .pagination ul {
   display: flex !important;
 }
+
 .pagination ul li a {
   padding: 10px;
 }
+
 .pagination .selected {
   border: 1px solid red;
+}
+
+/* .review css  */
+.review {
+  background-image: url('./assets/app2.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* dashboard sidebar  */
+.side-bar {
+  background-image: url('./assets/animate.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.menu {
+  padding: 0 !important;
+}
+
+/* my profile page */
+.profile-bg {
+  background-image: url('./assets/app1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }

@@ -14,7 +14,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const SignUp = () => {
 
     const [showPassword, setShowPassword] = useState(false)
-    const { createUser, updateUserProfile, logOutUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
 
     const navigate = useNavigate()
@@ -28,6 +28,7 @@ const SignUp = () => {
     const onSubmit = (data, e) => {
 
         const { name, email, photo, password } = data;
+        console.log(name, photo);
 
         if (password.length < 6) {
             return toast.error("Your password must be at least 6 characters")
@@ -42,8 +43,9 @@ const SignUp = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result);
-
-                logOutUser();
+                
+                updateUserProfile(name, photo)
+                navigate(location?.state || '/')
 
 
                 const userInfo = {
@@ -54,13 +56,12 @@ const SignUp = () => {
                 axiosPublic.post('/users', userInfo)
                     .then(data => {
                         if (data.data.insertedId) {
-                            navigate('/login')
                             Swal.fire({
                                 text: "User Created Successfully!",
                                 icon: "success"
                             });
                             e.target.reset()
-                            updateUserProfile(name, photo)
+                            
                         }
                     })
 
@@ -95,18 +96,18 @@ const SignUp = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <label className="space-y-2">
                                     <p className="text-white md:text-lg">Name</p>
-                                    <input type="text" name="name" placeholder="Name" className="bg-white rounded-md p-3 outline-none w-full bg-transparent" {...register("name", { required: true })} />
+                                    <input type="text" placeholder="Name" className="bg-white rounded-md p-3 outline-none w-full bg-transparent" {...register("name", { required: true })} />
                                     {errors.name && <span className="text-red-500 text-sm">This field is required</span>}
                                 </label>
                                 <label className="space-y-2">
                                     <p className="text-white md:text-lg">Email</p>
-                                    <input type="email" name="email" placeholder="Email" className="bg-white rounded-md p-3 outline-none w-full bg-transparent" {...register("email", { required: true })} />
+                                    <input type="email" placeholder="Email" className="bg-white rounded-md p-3 outline-none w-full bg-transparent" {...register("email", { required: true })} />
 
                                     {errors.email && <span className="text-red-500 text-sm">This field is required</span>}
                                 </label>
                                 <label className="space-y-2">
                                     <p className="text-white md:text-lg">Photo URL</p>
-                                    <input type="url" name="photo" placeholder="Photo URL" className="bg-white rounded-md p-3 outline-none w-full bg-transparent" {...register("photo", { required: true })} />
+                                    <input type="url" placeholder="Photo URL" className="bg-white rounded-md p-3 outline-none w-full bg-transparent" {...register("photo", { required: true })} />
                                     {errors.photo && <span className="text-red-500 text-sm">This field is required</span>}
                                 </label>
                                 <label className="space-y-2">

@@ -1,7 +1,8 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
 import useAuth from "../../Hooks/useAuth";
 import useModerator from "../../Hooks/useModerator";
+import logo from '../../assets/logo.png';
 
 const Dashboard = () => {
 
@@ -30,50 +31,64 @@ const Dashboard = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                    <div className="menu w-80 min-h-full text-base-content side-bar">
                         {/* Sidebar content here */}
 
-                        {
-                            user && !isAdmin && !isModerator && <>
+                        <div className="bg-black w-full min-h-screen bg-opacity-75 p-5">
+                            <div className="flex justify-center item-center">
+                                <Link to="/" className="flex items-center gap-2 mb-5">
+                                    <img className='w-8 animate-spin' src={logo} />
+                                    <span className="text-2xl font-bold text-white">Tech Apps</span>
+                                </Link>
+                            </div>
 
-                                <NavLink to="/dashboard/myProfile">My Profile</NavLink>
-                                <NavLink to="/dashboard/addProduct">Add Product</NavLink>
-                                <NavLink to="/dashboard/myProducts">My Products</NavLink>
+                            <div className="mb-5 space-y-5">
+                                <div className="flex justify-center items-center">
+                                    <img className="w-20 h-20 rounded-full" src={user?.photoURL} alt="" />
+                                </div>
+                                <h2 className="text-[#0ae0b8] text-center text-lg font-semibold">{user?.displayName}</h2>
+                            </div>
+                            <ul>
+                                {/* User route  */}
+                                {
+                                    user && !isAdmin && !isModerator && <>
 
-                            </>
-                        }
+                                        <li> <NavLink className="text-lg text-white" to="/dashboard/myProfile">My Profile</NavLink></li>
+                                        <li><NavLink className="text-lg text-white" to="/dashboard/addProduct">Add Product</NavLink></li>
+                                        <li><NavLink className="text-lg text-white" to="/dashboard/myProducts">My Products</NavLink></li>
 
-                        {
-                            isModerator && !isAdmin && <>
-                                <NavLink to="/dashboard/productReview">Product Review Queue</NavLink>
-                                <NavLink to="/dashboard/reportedProducts"> Reported Contents</NavLink>
-                            </>
-                        }
+                                    </>
+                                }
 
+                                {/* Moderator route */}
+                                {
+                                    isModerator && !isAdmin && <>
+                                        <li>
+                                            <NavLink className="text-lg text-white" to="/dashboard/productReview">Product Review Queue</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink className="text-lg text-white" to="/dashboard/reportedProducts"> Reported Contents</NavLink>
+                                        </li>
+                                    </>
+                                }
 
-                        {/* Admin route */}
+                                {/* Admin route */}
+                                {
+                                    isAdmin &&
+                                    <>
+                                        <li><NavLink className="text-lg text-white" to="/dashboard/statistics">Statistics</NavLink></li>
+                                        <li>
+                                            <NavLink className="text-lg text-white" to="/dashboard/manageUsers">Manage Users</NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink className="text-lg text-white" to="/dashboard/manageCoupons">Manage Coupons</NavLink>
+                                        </li>
+                                    </>
+                                }
+                            </ul>
+                        </div>
 
-                        {
-                            isAdmin &&
-                            <>
-                                <NavLink to="/dashboard/statistics">Statistics</NavLink>
-                                <NavLink to="/dashboard/manageUsers">Manage Users</NavLink>
-                                <NavLink to="/dashboard/manageCoupons">Manage Coupons</NavLink>
-                            </>
-                        }
-
-                        <hr />
-
-                        {/* shared nav link  */}
-
-                        <NavLink to="/">Home</NavLink>
-
-
-
-
-
-
-                    </ul>
+                    </div>
                 </div>
             </div>
         </div>

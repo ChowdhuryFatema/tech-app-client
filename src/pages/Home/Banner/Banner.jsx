@@ -3,11 +3,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import BannerBtn from "../../../components/BannerBtn";
 import { Carousel } from 'react-responsive-carousel';
 
-// import img2 from '../../../assets/animate-1.gif';
-// import img3 from '../../../assets/banner-1.jpg';
-// import img4 from '../../../assets/banner.jpg';
-// import img5 from '../../../assets/banner.png';
-
 import img1 from '../../../assets/animate.gif';
 import img2 from '../../../assets/app1.jpg';
 import img3 from '../../../assets/app2.jpg';

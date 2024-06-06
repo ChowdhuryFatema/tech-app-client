@@ -97,66 +97,64 @@ const AddProducts = () => {
             <Helmet>
                 <title>Tech Apps | Add Product</title>
             </Helmet>
-            <div className="add-book min-h-[calc(100vh-80px)] relative">
-                <div className="overlay1">
-                    <div className="max-w-5xl mx-auto px-5 py-16 relative z-30">
-                        <div className="mb-8">
-                            <h2 className="text-red text-3xl md:text-5xl text-red font-semibold text-center">Add Product</h2>
-                        </div>
-                        <form onSubmit={handleAddBook} className="space-y-2 md:space-y-5">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-5">
-
-                                <div className="space-y-2">
-                                    <p className="text-lg">Product Name</p>
-                                    <input type="text" name="name" placeholder="Product Name" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
-                                </div>
-
-
-                                <div className="space-y-2">
-                                    <p className="text-lg">Product Image</p>
-                                    <input type="url" name="image" placeholder="Photo URL" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
-                                </div>
-                            </div>
-                            <div>
-                                <div className="space-y-2">
-                                    <p className="text-lg">Description</p>
-                                    <textarea name="description" placeholder="Description" rows={8} className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" ></textarea>
-                                </div>
-                            </div>
-                            <div className="space-y-2">
-                                <p className="text-lg">Tags</p>
-                                <ReactTags
-                                    classNames="w-full p-10"
-                                    tags={tags}
-                                    delimiters={[KEYS.TAB, KEYS.SPACE, KEYS.COMMA]}
-                                    separators={[SEPARATORS.ENTER, SEPARATORS.COMMA]}
-                                    handleDelete={handleDelete}
-                                    handleAddition={handleAddition}
-                                    handleDrag={handleDrag}
-                                    handleTagClick={handleTagClick}
-                                    onTagUpdate={onTagUpdate}
-                                    onClearAll={onClearAll}
-                                    inputFieldPosition="bottom"
-                                    editable
-                                    clearAll
-                                    maxTags={7}
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <p className="text-lg">External Links</p>
-                                <input type="text" name="externalLink" placeholder="External Links" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
-                            </div>
-
-                            <div className="pt-5">
-                                <button type="submit">
-                                    <BannerBtn label="Add Product"></BannerBtn>
-                                </button>
-                            </div>
-                        </form>
+            <div>
+                <div className="mx-auto px-10 py-16">
+                    <div className="mb-8">
+                        <h2 className="text-red text-3xl md:text-5xl text-red font-semibold text-center">Add Product</h2>
                     </div>
-                </div>
+                    <form onSubmit={handleAddBook} className="space-y-2 md:space-y-5">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-5">
 
+                            <div className="space-y-2">
+                                <p className="text-lg">Product Name</p>
+                                <input type="text" name="name" placeholder="Product Name" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
+                            </div>
+
+
+                            <div className="space-y-2">
+                                <p className="text-lg">Product Image</p>
+                                <input type="url" name="image" placeholder="Photo URL" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
+                            </div>
+                        </div>
+                        <div>
+                            <div className="space-y-2">
+                                <p className="text-lg">Description</p>
+                                <textarea name="description" placeholder="Description" rows={8} className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" ></textarea>
+                            </div>
+                        </div>
+                        <div className="space-y-2">
+                            <p className="text-lg">Tags</p>
+                            <ReactTags
+                                classNames="w-full p-10"
+                                tags={tags}
+                                delimiters={[KEYS.TAB, KEYS.SPACE, KEYS.COMMA]}
+                                separators={[SEPARATORS.ENTER, SEPARATORS.COMMA]}
+                                handleDelete={handleDelete}
+                                handleAddition={handleAddition}
+                                handleDrag={handleDrag}
+                                handleTagClick={handleTagClick}
+                                onTagUpdate={onTagUpdate}
+                                onClearAll={onClearAll}
+                                inputFieldPosition="bottom"
+                                editable
+                                clearAll
+                                maxTags={7}
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <p className="text-lg">External Links</p>
+                            <input type="text" name="externalLink" placeholder="External Links" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
+                        </div>
+
+                        <div className="pt-5">
+                            <button type="submit">
+                                <BannerBtn label="Add Product"></BannerBtn>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
+
         </>
     );
 };

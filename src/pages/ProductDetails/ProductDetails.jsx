@@ -8,6 +8,8 @@ import { MdReportProblem } from "react-icons/md";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import BannerBtn from "../../components/BannerBtn";
+import ReviewForm from "./ReviewForm";
+import ReviewCard from "./ReviewCard";
 
 
 const ProductDetails = () => {
@@ -27,48 +29,51 @@ const ProductDetails = () => {
             .then(data => {
                 console.log(data.data);
                 Swal.fire("Successfully Added to Report");
-                
+
             })
 
     }
 
     return (
         <div>
-            <div className="min-h-[100px]">
+            <div className="min-h-[80px]">
                 <Navbar bgColor="bg-white"></Navbar>
             </div>
+            <div>
+                <img className="h-80 w-full object-cover -mt-5" src={detailsImg} alt="" />
+            </div>
             <div className="max-w-7xl mx-auto px-5">
-                <div>
-                    <img className="h-80 w-full object-cover" src={detailsImg} alt="" />
-                </div>
 
                 <div className="grid grid-cols-7 gap-5 my-10">
-                    <div className="grid grid-cols-7 gap-5  col-auto md:col-span-5">
-                        <div className="col-span-3">
-                            <img className="w-full" src={image} />
-                        </div>
-                        <div className="space-y-4 col-span-4">
-                            <div className='flex gap-5 justify-between'>
-                                <h2 className="card-title font-semibold">{name}</h2>
-                                <button className="flex btn flex-col justify-center border border-[#0ae0b8] bg-transparent items-center" disabled={user?.email == email}>
-                                    <BiSolidUpArrow size={20} className='text-[#0ae0b8]' />
-                                    <span className='-mt-1'>{upvotes}</span>
+                    <div className="col-auto md:col-span-5">
+                        <div className="grid grid-cols-7 gap-5 ">
+                            <div className="col-span-3">
+                                <img className="w-full" src={image} />
+                            </div>
+                            <div className="space-y-4 col-span-4">
+                                <div className='flex gap-5 justify-between'>
+                                    <h2 className="card-title font-semibold">{name}</h2>
+                                    <button className="flex btn flex-col justify-center border border-[#0ae0b8] bg-transparent items-center" disabled={user?.email == email}>
+                                        <BiSolidUpArrow size={20} className='text-[#0ae0b8]' />
+                                        <span className='-mt-1'>{upvotes}</span>
+                                    </button>
+                                </div>
+                                <ul className='flex gap-2 flex-wrap'>
+                                    {
+                                        tags.map((tag, idx) => <li key={idx}
+                                            className='bg-[#a4ebde] text-[#175e51] p-1 text-sm px-2 rounded'
+                                        >{tag}</li>)
+                                    }
+
+                                </ul>
+                                <p>{description}</p>
+                                <button onClick={() => handleReport(_id)} className="btn">
+                                    <MdReportProblem size={24} className="text-red-500" />
+                                    <span>Report</span>
                                 </button>
                             </div>
-                            <ul className='flex gap-2 flex-wrap'>
-                                {
-                                    tags.map((tag, idx) => <li key={idx}
-                                        className='bg-[#a4ebde] text-[#175e51] p-1 text-sm px-2 rounded'
-                                    >{tag}</li>)
-                                }
-
-                            </ul>
-                            <p>{description}</p>
-                            <button onClick={() => handleReport(_id)} className="btn">
-                                <MdReportProblem size={24} className="text-red-500" />
-                                <span>Report</span>
-                            </button>
                         </div>
+
                     </div>
                     <div className="col-auto md:col-span-2">
                         <section className="dark:text-gray-800">
@@ -87,13 +92,17 @@ const ProductDetails = () => {
                                     <textarea id="message" type="text" placeholder="Message..." className="block w-full p-2 rounded auto expand focus:outline-none focus:ring focus:ring-opacity-25 focus:dark:ring-violet-600 dark:bg-gray-100" rows={3}></textarea>
                                 </div>
                                 <div className="pt-5">
-                                  <BannerBtn label="Send"></BannerBtn>
+                                    <BannerBtn label="Send"></BannerBtn>
                                 </div>
                             </form>
                         </section>
                     </div>
                 </div>
+
+
             </div>
+            <ReviewCard></ReviewCard>
+            <ReviewForm></ReviewForm>
         </div>
     );
 };
