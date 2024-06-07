@@ -5,50 +5,62 @@ import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import { useLoaderData } from "react-router-dom";
+import { useForm } from "react-hook-form"
 
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const Update = () => {
     const myProducts = useLoaderData();
     console.log(myProducts);
-    const { _id, name, image, description, tags: allTag, externalLink } = myProducts;
+    const { _id, name, description, tags: allTag, externalLink } = myProducts;
     console.log(allTag);
 
     const axiosPublic = useAxiosPublic();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const [tags, setTags] = useState([]);
     const tag = tags.map(tag => tag.text)
 
-   
-    const handleUpdateBook = e => {
-        e.preventDefault();
-        const form = e.target;
-        const image = form.image.value;
-        const name = form.name.value;
-        const description = form.description.value;
-        const externalLink = form.externalLink.value;
+    const onSubmit = (data) => {
+        const image = data.image;
+        const name = data.name;
+        const description = data.description;
+        const externalLink = data.externalLink;
 
-
-        const updatedProduct = {
-            image,
-            name,
-            description,
-            externalLink,
-            tags: tag
-
-        }
-        console.log(updatedProduct)
-
-        axiosPublic.put(`/product/${_id}`, updatedProduct)
-       
+        const imageFile = { image: image[0] }
+        axiosPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
             .then(data => {
                 console.log(data.data);
 
-                if (data.data.insertedId) {
-                    Swal.fire({
-                        text: "Product Updated Successfully!",
-                        icon: "success"
-                    });
-                    form.reset()
+                if (data.data.success) {
+                    const updatedProduct = {
+                        name,
+                        description,
+                        externalLink,
+                        tags: tag,
+                        image: data.data.data.display_url,
+
+                    }
+
+                    axiosPublic.put(`/product/${_id}`, updatedProduct)
+                        .then(data => {
+                            console.log(data.data);
+
+                            if (data.data.insertedId) {
+                                Swal.fire({
+                                    text: "Product Updated Successfully!",
+                                    icon: "success"
+                                });
+                                reset()
+                            }
+                        })
                 }
             })
+
     }
 
     const handleDelete = (index) => {
@@ -97,34 +109,22 @@ const Update = () => {
                         <div className="mb-8">
                             <h2 className="text-red text-3xl md:text-5xl text-red font-semibold text-center">Update Product</h2>
                         </div>
-                        <form onSubmit={handleUpdateBook} className="space-y-2 md:space-y-5">
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-2 md:space-y-5">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-5">
 
                                 <div className="space-y-2">
                                     <p className="text-lg">Product Name</p>
-                                    <input type="text" defaultValue={name} name="name" placeholder="Product Name" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
+                                    <input type="text" defaultValue={name} {...register("name")} placeholder="Product Name" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
                                 </div>
 
 
                                 <div className="space-y-2">
-                                    <p className="text-lg">Product Image</p>
-                                    <input type="url" defaultValue={image} name="image" placeholder="Photo URL" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
-                                </div>
-                            </div>
-                            <div>
-                                <div className="space-y-2">
-                                    <p className="text-lg">Description</p>
-                                    <textarea name="description" defaultValue={description} placeholder="Description" rows={8} className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" ></textarea>
+                                    <p className="text-lg">External Links</p>
+                                    <input defaultValue={externalLink} type="text" {...register("externalLink")} placeholder="External Links" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
                                 </div>
                             </div>
                             <div className="space-y-2">
                                 <p className="text-lg">Tags</p>
-                                {/* <div className="ReactTags__selected">
-                                    <ul>
-                                        {allTag.map((tag, idx) => <span key={idx} className="tag-wrapper ReactTags__tag" data-testid="tag" draggable="true" style={{'opacity': 1, 'cursor': 'move'}}>asdf<button data-testid="remove" className="ReactTags__remove" type="button" aria-label="Tag at index 0 with value asdf focussed. Press backspace to remove"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="12" width="12" fill="#fff"><path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"></path></svg></button></span>)}
-                                    </ul>
-                                </div> */}
-
                                 <ReactTags
                                     classNames="w-full p-10"
                                     tags={tags}
@@ -142,15 +142,27 @@ const Update = () => {
                                     maxTags={7}
                                 />
                             </div>
-                            <div className="space-y-2">
-                                <p className="text-lg">External Links</p>
-                                <input defaultValue={externalLink} type="text" name="externalLink" placeholder="External Links" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
+                            <div>
+                                <div className="space-y-2">
+                                    <p className="text-lg">Description</p>
+                                    <textarea {...register("description")} defaultValue={description} placeholder="Description" rows={8} className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" ></textarea>
+                                </div>
                             </div>
 
-                            <div className="pt-5">
-                                <button type="submit">
-                                    <BannerBtn label="Add Product"></BannerBtn>
-                                </button>
+                            <div className="flex flex-col md:flex-row justify-between mt-5 md:items-center gap-5">
+                                <div>
+                                    <input
+                                        {...register("image", { required: true })}
+                                        type="file" className="file-input w-full max-w-xs" /><br />
+                                    {errors.image && <span className="text-red-500">
+                                        Image is required</span>}
+                                </div>
+
+                                <div>
+                                    <button type="submit">
+                                        <BannerBtn label="Add Product"></BannerBtn>
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>

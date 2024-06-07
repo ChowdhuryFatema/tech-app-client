@@ -88,13 +88,13 @@ const CheckoutForm = () => {
                 }
 
                 const res = await axiosSecure.post('/payments', payment);
-                if(res.data?.paymentResult?.insertedId){
+                if (res.data?.paymentResult?.insertedId) {
                     Swal.fire({
                         icon: "success",
                         title: "Thanks for the payment",
                         showConfirmButton: false,
                         timer: 1500
-                      });
+                    });
                     //   navigate('/dashboard/paymentHistory')
                 }
             }
@@ -120,9 +120,15 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe || !clientSecret}>
-                Pay
-            </button>
+            <div className="flex justify-evenly w-full items-center mt-10 border-t border-[#0ae0b8] pt-5">
+                <button className="btn btn-sm btn-primary" type="submit" disabled={!stripe || !clientSecret}>
+                    Pay
+                </button>
+                <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="btn btn-sm">Close</button>
+                </form>
+            </div>
             <p className="text-red-500">{error}</p>
             {transactionId && <p className="text-green-500"> Your transaction id: {transactionId}</p>}
         </form>
