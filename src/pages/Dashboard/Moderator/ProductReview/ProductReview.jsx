@@ -1,15 +1,39 @@
 import useProducts from "../../../../Hooks/useProducts";
-import { FcAcceptDatabase } from "react-icons/fc";
 import { MdBlockFlipped } from "react-icons/md";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 
 const ProductReview = () => {
 
+    const [sortedProducts, setSortedProducts] = useState([]);
     const { products, refetch } = useProducts();
     const axiosPublic = useAxiosPublic();
+
+    useEffect(() => {
+        const sort = products.sort((a, b) => {
+            if (a.status === 'Pending' && b.status !== 'Pending') {
+              return -1;
+            } else if (a.status !== 'Pending' && b.status === 'Pending') {
+              return 1;
+            } else if (a.status === 'Accepted' && b.status !== 'Accepted') {
+              return -1;
+            } else if (a.status !== 'Accepted' && b.status === 'Accepted') {
+              return 1;
+            } 
+            else if (a.status === 'Rejected' && b.status !== 'Rejected') {
+              return -1;
+            } else if (a.status !== 'Rejected' && b.status === 'Rejected') {
+              return 1;
+            } 
+            else {
+              return 0;
+            }
+          });
+        setSortedProducts(sort)
+    }, [products])
 
 
     const handleMakeFeatured = id => {
@@ -88,24 +112,22 @@ const ProductReview = () => {
 
     return (
         <div className="px-5">
-            {products.length}
-
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
                     <thead>
                         <tr>
-                            <th></th>
                             <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
-                            <th></th>
+                            <th>Details</th>
+                            <th>Make Featured</th>
+                            <th>Accept</th>
+                            <th>Reject</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         {
-                            products.map(product => <tr key={product._id}>
+                            sortedProducts.map(product => <tr key={product._id}>
 
                                 <td>
                                     <div className="flex items-center gap-3">
@@ -122,19 +144,21 @@ const ProductReview = () => {
                                     </div>
                                 </td>
                                 <td>
-                                    <button className="btn btn-sm bg-red-100 text-red-600">
+                                    <button className="btn btn-sm bg-green-100 text-green-600">
                                        <Link to={`/productDetails/${product._id}`}>View Details</Link>
                                     </button>
                                 </td>
                                 <td>
-                                    <button onClick={() => handleMakeFeatured(product._id)} className="btn btn-sm bg-red-100 text-red-600">
+                                    <button onClick={() => handleMakeFeatured(product._id)} className="btn btn-sm bg-blue-100 text-blue-600">
                                         Make Featured
                                     </button>
                                 </td>
                                 <td>
-                                    <button disabled={product.status === 'Accepted'} onClick={() => handleAcceptProduct(product._id, "Accepted")} className="btn">
-                                        <FcAcceptDatabase size={20} />
-                                    </button>
+                            <button 
+                            disabled={product.status === 'Accepted'} onClick={() => handleAcceptProduct(product._id, "Accepted")} 
+                            className={`btn ${product.status === "Rejected" && 'text-red-500'}`}>
+                                {product.status}
+                            </button>
                                 </td>
                                 <td>
                                     <button disabled={product.status === 'Rejected'} onClick={() => handleRejectedProduct(product._id, "Rejected")} className="btn">

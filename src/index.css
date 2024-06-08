@@ -14,7 +14,8 @@ body {
 /* navbar start */
 .active {
   background-color: transparent !important;
-  border-bottom: 3px solid #0ae0b8;
+  border-bottom: 2px solid #0ae0b8;
+  border-radius: 0;
 }
 
 /* .active::after {

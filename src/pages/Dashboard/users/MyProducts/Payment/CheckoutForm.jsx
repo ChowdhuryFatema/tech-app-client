@@ -7,7 +7,7 @@ import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../../Hooks/useAuth";
 import PropTypes from 'prop-types';
 
-const CheckoutForm = ({totalAmount}) => {
+const CheckoutForm = ({totalAmount, refetch}) => {
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('');
@@ -26,6 +26,7 @@ const CheckoutForm = ({totalAmount}) => {
                     setClientSecret(res.data.clientSecret);
                 })
         }
+
     }, [axiosSecure, totalAmount])
 
 
@@ -83,7 +84,7 @@ const CheckoutForm = ({totalAmount}) => {
                     price: totalAmount,
                     transactionId: paymentIntent.id,
                     date: new Date().toLocaleDateString(),
-                    status: 'pending',
+                    Status: 'Verified',
                 }
 
                 const res = await axiosSecure.post('/payments', payment);
@@ -94,8 +95,10 @@ const CheckoutForm = ({totalAmount}) => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    refetch();
                     //   navigate('/dashboard/paymentHistory')
                 }
+                refetch();
             }
         }
 
@@ -140,5 +143,6 @@ const CheckoutForm = ({totalAmount}) => {
 
 CheckoutForm.propTypes = {
     totalAmount: PropTypes.number,
+    refetch: PropTypes.func,
 }
 export default CheckoutForm;

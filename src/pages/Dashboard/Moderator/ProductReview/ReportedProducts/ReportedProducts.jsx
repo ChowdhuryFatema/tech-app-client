@@ -67,13 +67,13 @@ const ReportedProducts = () => {
                                 <th>{idx + 1}</th>
                                 <td>{reportedProduct.name}</td>
                                 <td>
-                                    <button className="btn btn-sm bg-red-100 text-red-600">
+                                    <button className="btn btn-sm bg-green-100 text-green-600">
                                         <Link to={`/productDetails/${reportedProduct._id}`}>View Details</Link>
                                     </button>
                                 </td>
                                 <td>
                                     <button onClick={() => handleDeleteReport(reportedProduct._id)} >
-                                        <MdDeleteForever size={24} className="text-red-500" />
+                                        <MdDeleteForever size={32} className="text-red-500" />
                                     </button>
 
                                 </td>

@@ -3,6 +3,8 @@ import useAuth from "../../../../Hooks/useAuth";
 import Payment from "../MyProducts/Payment/Payment";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import LoadingSpinner from "../../../../components/LoadingSpinner";
 
 
 const MyProfile = () => {
@@ -11,7 +13,17 @@ const MyProfile = () => {
     // const [coupon, setCoupon] = useState(null);
     const [totalAmount, setTotalAmount] = useState(0)
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
+   const {data: payments=[], refetch, isLoading} = useQuery({
+    queryKey: ['payments'],
+    queryFn: async () => {
+        const res = await axiosSecure.get(`/payments/${user?.email}`)
+        return res.data;
+        
+    }
+   })
+    console.log('payyyyyyyyyy', payments);
 
     const { data: coupons = [] } = useQuery({
         queryKey: ['coupon'],
@@ -21,9 +33,12 @@ const MyProfile = () => {
         }
     })
 
+   
+
     const handleCoupon = e => {
         e.preventDefault();
-        const coupon = e.target.coupon.value;
+        const couponField = e.target.coupon.value;
+        const coupon = couponField.toUpperCase().trim();
         // setCoupon(coupon)
         e.target.reset();
 
@@ -43,28 +58,32 @@ const MyProfile = () => {
         }
     }
 
+    if(isLoading){
+        return <LoadingSpinner></LoadingSpinner>
+    }
+
     return (
         <div className="flex justify-center items-center min-h-screen">
             <div className="text-center space-y-4 shadow-2xl">
-                <div className="profile-bg flex justify-center items-center p-10">
-                    <img className="rounded-full w-40 h-40 -mb-28" src={user?.photoURL} />
+                <div className="profile-bg flex justify-center items-center py-16 px-20">
+                    <img className="rounded-full w-40 h-40 -mb-32" src={user?.photoURL} />
                 </div>
                 <div className="p-10">
-                    <h2 className="mt-10">Name: {user?.displayName}</h2>
-                    <p>Email: {user?.email}</p>
+                    <h2 className="mt-10 lg:text-lg"><span className="font-bold">Name:</span> {user?.displayName}</h2>
+                    <p className="lg:text-lg"><span className="font-bold">Email:</span> {user?.email}</p>
                     
                     {/* modal  */}
-                    <button className="mt-8" onClick={() => document.getElementById('my_modal_5').showModal()}>
+                    <button disabled={payments.length > 0} className="mt-8" onClick={() => document.getElementById('my_modal_5').showModal()}>
 
 
-                        <a className="relative cursor-pointer px-5 py-2 font-medium text-black group">
+                        <a className="relative cursor-pointer px-5 py-2 font-medium text-black group md:text-lg">
                             <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-[#085f4f] group-hover:bg-[#0ae0b8] group-hover:skew-x-12"></span>
                             <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-[#0ae0b8] group-hover:bg-[#0e977e] group-hover:-skew-x-12"></span>
                             <span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-[#0ae0b8] -rotate-12"></span>
                             <span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-[#0ae0b8] -rotate-12"></span>
                             <span className="relative group-hover:text-white">
-                                {/* Membership Subscription {coupons.length} */}
-                                $1000
+                                {payments.length > 0 ? 'Already Subscribed': 'Membership Subscription $1000'}
+                                
                             </span>
                         </a>
                     </button>
@@ -103,7 +122,7 @@ const MyProfile = () => {
 
                     <dialog id="my_modal_1" className="modal">
                         <div className="modal-box pt-10">
-                            <Payment totalAmount={totalAmount}></Payment>
+                            <Payment totalAmount={totalAmount} refetch={refetch}></Payment>
                             <div className="modal-action">
 
                             </div>

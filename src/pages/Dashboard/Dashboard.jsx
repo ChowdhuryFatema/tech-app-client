@@ -3,6 +3,15 @@ import useAdmin from "../../Hooks/useAdmin";
 import useAuth from "../../Hooks/useAuth";
 import useModerator from "../../Hooks/useModerator";
 import logo from '../../assets/logo.png';
+import { CgProfile } from "react-icons/cg";
+import { IoMdAdd } from "react-icons/io";
+import { AiOutlineProduct } from "react-icons/ai";
+import { IoHomeOutline } from "react-icons/io5";
+import { MdOutlinePreview } from "react-icons/md";
+import { MdOutlineReport } from "react-icons/md";
+import { BsGraphUpArrow } from "react-icons/bs";
+import { FaUserFriends } from "react-icons/fa";
+import { RiCouponLine } from "react-icons/ri";
 
 const Dashboard = () => {
 
@@ -53,9 +62,14 @@ const Dashboard = () => {
                                 {
                                     user && !isAdmin && !isModerator && <>
 
-                                        <li> <NavLink className="text-lg text-white" to="/dashboard/myProfile">My Profile</NavLink></li>
-                                        <li><NavLink className="text-lg text-white" to="/dashboard/addProduct">Add Product</NavLink></li>
-                                        <li><NavLink className="text-lg text-white" to="/dashboard/myProducts">My Products</NavLink></li>
+                                        <li> <NavLink className="py-3 text-lg text-white" to="/dashboard/myProfile">
+                                            <CgProfile size={24}  /> My Profile
+                                        </NavLink></li>
+                                        <li><NavLink className="py-3 text-lg text-white" to="/dashboard/addProduct">
+                                            <IoMdAdd size={24} className="text-[#0ae0b8]" /> Add Product
+                                        </NavLink></li>
+                                        <li><NavLink className="py-3 text-lg text-white" to="/dashboard/myProducts">
+                                            <AiOutlineProduct size={24} className="text-[#0ae0b8]" /> My Products</NavLink></li>
 
                                     </>
                                 }
@@ -64,10 +78,15 @@ const Dashboard = () => {
                                 {
                                     isModerator && !isAdmin && <>
                                         <li>
-                                            <NavLink className="text-lg text-white" to="/dashboard/productReview">Product Review Queue</NavLink>
+                                            <NavLink className="py-3 text-lg text-white" to="/dashboard/productReview">
+                                            
+                                            <MdOutlinePreview size={24} className="text-[#0ae0b8]" />
+                                            Product Review Queue</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink className="text-lg text-white" to="/dashboard/reportedProducts"> Reported Contents</NavLink>
+                                            <NavLink className="py-3 text-lg text-white" to="/dashboard/reportedProducts"> 
+                                            <MdOutlineReport size={24} className="text-[#0ae0b8]" />
+                                            Reported Contents</NavLink>
                                         </li>
                                     </>
                                 }
@@ -76,15 +95,32 @@ const Dashboard = () => {
                                 {
                                     isAdmin &&
                                     <>
-                                        <li><NavLink className="text-lg text-white" to="/dashboard/statistics">Statistics</NavLink></li>
+                                        <li><NavLink className="py-3 text-lg text-white" to="/dashboard/statistics">
+                                        <BsGraphUpArrow size={24} className="text-[#0ae0b8]" />
+                                        Statistics</NavLink></li>
                                         <li>
-                                            <NavLink className="text-lg text-white" to="/dashboard/manageUsers">Manage Users</NavLink>
+                                            <NavLink className="py-3 text-lg text-white" to="/dashboard/manageUsers">
+                                            
+                                            <FaUserFriends size={24} className="text-[#0ae0b8]" />
+                                            Manage Users</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink className="text-lg text-white" to="/dashboard/manageCoupons">Manage Coupons</NavLink>
+                                            <NavLink className="py-3 text-lg text-white" to="/dashboard/manageCoupons">
+                                            <RiCouponLine size={24} className="text-[#0ae0b8]" />
+                                            Manage Coupons</NavLink>
                                         </li>
                                     </>
                                 }
+
+                                <hr className="my-3"/>
+
+                                <li>
+                                    <NavLink className="py-3 text-lg text-white" to="/"><IoHomeOutline size={24} className="text-[#0ae0b8]"/> Home</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="py-3 text-lg text-white" to="/">
+                                    <AiOutlineProduct size={24} className="text-[#0ae0b8]" /> Products</NavLink>
+                                </li>
                             </ul>
                         </div>
 

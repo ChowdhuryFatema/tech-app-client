@@ -70,15 +70,13 @@ const Login = () => {
 
     return (
         <>
-            <div className="min-h-[100px]">
-                <Navbar bgColor="bg-white"></Navbar>
-            </div>
-            <div className="mb-10">
+            <Navbar bgColor="bg-white"></Navbar>
+            <div className="my-10 md:my-20">
                 <div className="max-w-2xl mx-auto px-5">
                     <div className="sign-up rounded-md">
-                        <div className="col-auto md:col-span-2 w-full space-y-3 dark:bg-gray-800 shadow-xl p-8">
+                        <div className="col-auto md:col-span-2 w-full space-y-3 dark:bg-gray-800 shadow-xl p-8 bg-black bg-opacity-20">
                             <div className="mb-10">
-                                <h2 className="text-4xl md:text-5xl text-white font-bold heading relative logo text-center">Login</h2>
+                                <h2 className="text-4xl md:text-5xl text-white font-bold text-center">Login</h2>
                             </div>
                             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                                 <div>

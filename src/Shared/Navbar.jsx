@@ -50,6 +50,22 @@ const Navbar = ({ color, bgColor, logoColor }) => {
                             </div>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                                 {navLinks}
+                                <div className='md:hidden flex gap-4 justify-center items-center my-3'>
+                                    <Link to="/logIn" className="relative px-4 py-2 font-bold overflow-hidden group bg-[#0ae0b8] hover:bg-gradient-to-r hover:from-[#0ae0b8] hover:to-[#0ae0b8] text-white rounded-md transition-all ease-out duration-300">
+                                        <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                                        <span className="relative">Sign In</span>
+                                    </Link>
+                                    <Link to="/signUp" className={`relative inline-flex items-center justify-center px-4 py-2 overflow-hidden font-bold ${color} hover:text-white rounded-md shadow-2xl group border border-[#0ae0b8]`}>
+                                        <span className="absolute inset-0 w-full h-full transition duration-300 ease-out opacity-0 bg-[#0ae0b8] group-hover:opacity-100"></span>
+                                        <span className="absolute top-0 left-0 w-full bg-gradient-to-b from-white to-transparent opacity-5 h-1/3"></span>
+                                        <span className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-white to-transparent opacity-5"></span>
+                                        <span className="absolute bottom-0 left-0 w-4 h-full bg-gradient-to-r from-white to-transparent opacity-5"></span>
+                                        <span className="absolute bottom-0 right-0 w-4 h-full bg-gradient-to-l from-white to-transparent opacity-5"></span>
+                                        <span className="absolute inset-0 w-full h-full border border-white rounded-md opacity-10"></span>
+                                        <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-5"></span>
+                                        <span className="relative">Sign Up</span>
+                                    </Link>
+                                </div>
                             </ul>
                         </div>
                         <Link to="/" className="flex items-center gap-2">
@@ -110,7 +126,7 @@ const Navbar = ({ color, bgColor, logoColor }) => {
                                     </ul>
                                 </div>
                                 :
-                                <div className='flex gap-4'>
+                                <div className='hidden md:flex gap-4'>
                                     <Link to="/logIn" className="relative px-4 py-2 font-bold overflow-hidden group bg-[#0ae0b8] hover:bg-gradient-to-r hover:from-[#0ae0b8] hover:to-[#0ae0b8] text-white rounded-md transition-all ease-out duration-300">
                                         <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
                                         <span className="relative">Sign In</span>
@@ -123,7 +139,8 @@ const Navbar = ({ color, bgColor, logoColor }) => {
                                         <span className="absolute bottom-0 right-0 w-4 h-full bg-gradient-to-l from-white to-transparent opacity-5"></span>
                                         <span className="absolute inset-0 w-full h-full border border-white rounded-md opacity-10"></span>
                                         <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-5"></span>
-                                        <span className="relative">Sign Up</span>
+                                        <span 
+                                        className={`relative ${logoColor}`}>Sign Up</span>
                                     </Link>
                                 </div>
                         }
