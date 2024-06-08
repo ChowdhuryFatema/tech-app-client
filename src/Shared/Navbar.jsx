@@ -4,14 +4,18 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import useAuth from '../Hooks/useAuth';
 import userImg from '../assets/user.png';
+import useAdmin from '../Hooks/useAdmin';
+import useModerator from '../Hooks/useModerator';
 
-const Navbar = ({ color, bgColor }) => {
+const Navbar = ({ color, bgColor, logoColor }) => {
 
     const { user, logOutUser } = useAuth();
+    const [isAdmin] = useAdmin();
+    const [isModerator] = useModerator();
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     const navLinks = <>
-        <NavLink className={`corner relative text-lg px-4 py-2 font-semibold ${color}`} to="/">Home</NavLink>
-        <NavLink className={`corner relative text-lg px-4 py-2 font-semibold ${color}`} to="/products">Products</NavLink>
+        <NavLink className={`corner relative md:text-lg px-4 py-2 font-semibold ${color}`} to="/">Home</NavLink>
+        <NavLink className={`corner relative md:text-lg px-4 py-2 font-semibold ${color}`} to="/products">Products</NavLink>
     </>
 
     const handleLogOut = () => {
@@ -36,21 +40,21 @@ const Navbar = ({ color, bgColor }) => {
     }
 
     return (
-        <div className={`fixed w-full top-0 left-0 z-50 shadow-md ${bgColor}`}>
+        <div className={`shadow-md ${bgColor} w-full`}>
             <div className='max-w-7xl mx-auto px-5'>
-                <div className="navbar">
+                <div className="navbar md:py-5">
                     <div className="navbar-start">
                         <div className="dropdown">
-                            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 ${color}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                            <div tabIndex={0} role="button" className="btn btn-ghost p-0 mr-2 lg:hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 ${logoColor}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                             </div>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                                 {navLinks}
                             </ul>
                         </div>
                         <Link to="/" className="flex items-center gap-2">
-                            <img className='w-10 animate-spin' src={logo} />
-                            <span className={`text-3xl font-bold ${color}`}>Tech Apps</span>
+                            <img className='w-5 lg:w-10 animate-spin' src={logo} />
+                            <span className={`text-xl md:text-2xl lg:text-3xl font-bold ${logoColor}`}>Tech Apps</span>
                         </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
@@ -87,7 +91,20 @@ const Navbar = ({ color, bgColor }) => {
                                             </a>
                                         </li>
                                         <li>
-                                            <Link to="/dashboard/myProducts">Dashboard</Link>
+
+                                            {
+                                                user && !isAdmin && !isModerator &&
+                                                <Link to="/dashboard/myProducts">Dashboard</Link>
+                                            }
+                                            {
+                                                isModerator && !isAdmin &&
+                                                <Link to="/dashboard/productReview">Dashboard</Link>
+                                            }
+                                            {
+                                                isAdmin && !isModerator &&
+                                                <Link to="/dashboard/statistics">Dashboard</Link>
+                                            }
+
                                         </li>
                                         <li onClick={handleLogOut}><a className="py-2">Logout</a></li>
                                     </ul>
@@ -120,5 +137,6 @@ const Navbar = ({ color, bgColor }) => {
 Navbar.propTypes = {
     color: PropTypes.string,
     bgColor: PropTypes.string,
+    logoColor: PropTypes.string,
 }
 export default Navbar;

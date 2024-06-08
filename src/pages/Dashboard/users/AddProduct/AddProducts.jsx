@@ -111,7 +111,7 @@ const AddProducts = () => {
             <Helmet>
                 <title>Tech Apps | Add Product</title>
             </Helmet>
-            <div>
+            <div className="bg-[#E5E7EB]">
                 <div className="mx-auto px-10 py-16">
                     <div className="mb-8">
                         <h2 className="text-red text-3xl md:text-5xl text-red font-semibold text-center">Add Product</h2>
@@ -121,12 +121,12 @@ const AddProducts = () => {
 
                             <div className="space-y-2">
                                 <p className="text-lg">Product Name</p>
-                                <input type="text"  {...register("name", { required: true })} placeholder="Product Name" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
+                                <input type="text"  {...register("name", { required: true })} placeholder="Product Name" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md bg-white" />
                                 {errors.name && <span className="text-red-500">Product Name is required</span>}
                             </div>
                             <div className="space-y-2">
                                 <p className="text-lg">External Links</p>
-                                <input type="text" {...register("externalLink", { required: true })} placeholder="External Links" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" />
+                                <input type="text" {...register("externalLink", { required: true })} placeholder="External Links" className="border py-3 px-2 outline-none w-full bg-transparent rounded-md bg-white" />
                             </div>
                         </div>
                         <div className="space-y-2">
@@ -151,7 +151,7 @@ const AddProducts = () => {
                         <div>
                             <div className="space-y-2">
                                 <p className="text-lg">Description</p>
-                                <textarea {...register("description")} placeholder="Description" rows={8} className="border py-3 px-2 outline-none w-full bg-transparent rounded-md" ></textarea>
+                                <textarea {...register("description")} placeholder="Description" rows={8} className="border py-3 px-2 outline-none w-full bg-transparent rounded-md bg-white" ></textarea>
                             </div>
                         </div>
 

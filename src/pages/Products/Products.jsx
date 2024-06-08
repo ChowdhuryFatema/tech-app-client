@@ -51,45 +51,48 @@ const Products = ({ itemsPerPage = 6 }) => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-5">
+        <>
             <div className="min-h-[100px]">
-                <Navbar bgColor="bg-white"></Navbar>
+                <Navbar></Navbar>
             </div>
-            <form onSubmit={handleSearch} className="join">
-                <div>
+            <div className="max-w-7xl mx-auto px-5">
+
+                <form onSubmit={handleSearch} className="join">
                     <div>
-                        <input className="input input-bordered join-item" placeholder="Search" name="search" />
+                        <div>
+                            <input className="input input-bordered join-item" placeholder="Search" name="search" />
+                        </div>
                     </div>
+                    <div className="indicator">
+                        <button type="submit" className="btn join-item">Search</button>
+                    </div>
+                </form>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
+                    {currentItems &&
+                        currentItems.map((product) => (
+                            <ProductCard
+                                key={product._id}
+                                product={product}
+                                refetch={refetch}></ProductCard>
+                        ))}
                 </div>
-                <div className="indicator">
-                    <button type="submit" className="btn join-item">Search</button>
+
+
+                <div className="pagination">
+                    <ReactPaginate
+                        breakLabel="..."
+                        nextLabel="next >"
+                        onPageChange={handlePageClick}
+                        pageRangeDisplayed={6}
+                        pageCount={pageCount}
+                        previousLabel="< previous"
+                        renderOnZeroPageCount={null}
+                        itemsPerPage={6}
+                    />
                 </div>
-            </form>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
-                {currentItems &&
-                    currentItems.map((product) => (
-                        <ProductCard
-                            key={product._id}
-                            product={product}
-                            refetch={refetch}></ProductCard>
-                    ))}
+
             </div>
-
-
-            <div className="pagination">
-                <ReactPaginate
-                    breakLabel="..."
-                    nextLabel="next >"
-                    onPageChange={handlePageClick}
-                    pageRangeDisplayed={6}
-                    pageCount={pageCount}
-                    previousLabel="< previous"
-                    renderOnZeroPageCount={null}
-                    itemsPerPage={6}
-                />
-            </div>
-
-        </div>
+        </>
     );
 };
 

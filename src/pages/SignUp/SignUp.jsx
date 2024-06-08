@@ -96,24 +96,24 @@ const SignUp = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <label className="space-y-2">
                                     <p className="text-white md:text-lg">Name</p>
-                                    <input type="text" placeholder="Name" className="bg-white rounded-md p-3 outline-none w-full bg-transparent" {...register("name", { required: true })} />
+                                    <input type="text" placeholder="Name" className="border text-white rounded-md p-3 outline-none w-full bg-transparent" {...register("name", { required: true })} />
                                     {errors.name && <span className="text-red-500 text-sm">This field is required</span>}
                                 </label>
                                 <label className="space-y-2">
                                     <p className="text-white md:text-lg">Email</p>
-                                    <input type="email" placeholder="Email" className="bg-white rounded-md p-3 outline-none w-full bg-transparent" {...register("email", { required: true })} />
+                                    <input type="email" placeholder="Email" className="border text-white rounded-md p-3 outline-none w-full bg-transparent" {...register("email", { required: true })} />
 
                                     {errors.email && <span className="text-red-500 text-sm">This field is required</span>}
                                 </label>
                                 <label className="space-y-2">
                                     <p className="text-white md:text-lg">Photo URL</p>
-                                    <input type="url" placeholder="Photo URL" className="bg-white rounded-md p-3 outline-none w-full bg-transparent" {...register("photo", { required: true })} />
+                                    <input type="url" placeholder="Photo URL" className="border text-white rounded-md p-3 outline-none w-full bg-transparent" {...register("photo", { required: true })} />
                                     {errors.photo && <span className="text-red-500 text-sm">This field is required</span>}
                                 </label>
                                 <label className="space-y-2">
                                     <p className="text-white md:text-lg">Password</p>
                                     <div className="relative">
-                                        <input type={showPassword ? 'text' : 'password'} name="password" placeholder="Password" className="bg-white rounded-md p-3 outline-none w-full bg-transparent" {...register("password", { required: true })} />
+                                        <input type={showPassword ? 'text' : 'password'} name="password" placeholder="Password" className="border text-white rounded-md p-3 outline-none w-full bg-transparent" {...register("password", { required: true })} />
 
                                         <p
                                             onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3">

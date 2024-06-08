@@ -2,9 +2,9 @@ import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import BannerBtn from "../../components/BannerBtn";
+import PropTypes from 'prop-types';
 
-
-const ReviewForm = () => {
+const ReviewForm = ({refetch}) => {
 
     const { user } = useAuth();
     const axiosPublic = useAxiosPublic();
@@ -39,6 +39,7 @@ const ReviewForm = () => {
                     });
                     form.reset()
                 }
+                refetch();
             })
     }
 
@@ -50,7 +51,7 @@ const ReviewForm = () => {
             <div className="overlay1">
                 <div className="max-w-5xl mx-auto px-5 py-16 relative z-30">
                     <div className="mb-8">
-                        <h2 className="text-red text-3xl md:text-5xl text-red font-semibold text-center">Add Product</h2>
+                        <h2 className="text-red text-3xl md:text-5xl text-red font-semibold text-center">Add Review</h2>
                     </div>
                     <form onSubmit={handleReviewSubmit} className="space-y-2 md:space-y-5">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-5">
@@ -104,6 +105,9 @@ const ReviewForm = () => {
     );
 };
 
+ReviewForm.propTypes = {
+    refetch: PropTypes.func,
+}
 export default ReviewForm;
 
 

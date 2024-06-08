@@ -10,6 +10,8 @@ import Swal from "sweetalert2";
 import BannerBtn from "../../components/BannerBtn";
 import ReviewForm from "./ReviewForm";
 import ReviewCard from "./ReviewCard";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const ProductDetails = () => {
@@ -18,9 +20,18 @@ const ProductDetails = () => {
     const { user } = useAuth();
 
     const axiosSecure = useAxiosSecure();
-
+    const axiosPublic = useAxiosPublic();
     const product = products.find(pro => pro._id === id) || {};
     const { _id, image, name, description, tags = [], email, upvotes } = product;
+
+
+    const { data: reviews = [], refetch } = useQuery({
+        queryKey: ['reviews'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/productReview')
+            return res.data;
+        }
+    })
 
     const handleReport = id => {
         console.log(id);
@@ -101,8 +112,8 @@ const ProductDetails = () => {
 
 
             </div>
-            <ReviewCard></ReviewCard>
-            <ReviewForm></ReviewForm>
+            <ReviewCard reviews={reviews}></ReviewCard>
+            <ReviewForm refetch={refetch}></ReviewForm>
         </div>
     );
 };

@@ -1,9 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { Swiper } from 'swiper/react';
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper/modules';
-
+import PropTypes from 'prop-types';
 import { IoIosStar, IoIosStarOutline } from "react-icons/io";
 import Rating from "react-rating";
 import { SwiperSlide } from 'swiper/react';
@@ -13,8 +11,7 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
 
-const ReviewCard = () => {
-    const axiosPublic = useAxiosPublic();
+const ReviewCard = ({reviews}) => {
 
     const colors = ['#1a75ffb0', '#f3f', '#ffa500', '#ea97be']
 
@@ -24,13 +21,7 @@ const ReviewCard = () => {
         color.push('#1a75ffb0', '#f3f', '#ffa500', '#ea97be');
     }
 
-    const { data: reviews = [] } = useQuery({
-        queryKey: ['reviews'],
-        queryFn: async () => {
-            const res = await axiosPublic.get('/productReview')
-            return res.data;
-        }
-    })
+   
 
     return (
         <div className="review">
@@ -101,4 +92,7 @@ const ReviewCard = () => {
     );
 };
 
+ReviewCard.propTypes = {
+    reviews: PropTypes.array,
+}
 export default ReviewCard;

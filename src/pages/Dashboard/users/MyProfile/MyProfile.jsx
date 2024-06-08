@@ -1,12 +1,47 @@
+import { useState } from "react";
 import useAuth from "../../../../Hooks/useAuth";
-import BannerBtn from "../../../../components/BannerBtn";
 import Payment from "../MyProducts/Payment/Payment";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 
 
 const MyProfile = () => {
 
     const { user } = useAuth();
-    console.log(user);
+    // const [coupon, setCoupon] = useState(null);
+    const [totalAmount, setTotalAmount] = useState(0)
+    const axiosPublic = useAxiosPublic();
+
+
+    const { data: coupons = [] } = useQuery({
+        queryKey: ['coupon'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/coupon')
+            return res.data;
+        }
+    })
+
+    const handleCoupon = e => {
+        e.preventDefault();
+        const coupon = e.target.coupon.value;
+        // setCoupon(coupon)
+        e.target.reset();
+
+        const totalPrice = 1000;
+
+        const isExists = coupons.find(c => c.couponCode == coupon)
+
+
+        if (isExists) {
+            const discountAmount = (totalPrice * isExists.discountAmount) / 100;
+            const price = totalPrice - discountAmount;
+            setTotalAmount(price);
+        }
+        else {
+            const price = 1000;
+            setTotalAmount(price);
+        }
+    }
 
     return (
         <div className="flex justify-center items-center min-h-screen">
@@ -17,19 +52,66 @@ const MyProfile = () => {
                 <div className="p-10">
                     <h2 className="mt-10">Name: {user?.displayName}</h2>
                     <p>Email: {user?.email}</p>
-
+                    
                     {/* modal  */}
-                    <button className="mt-8" onClick={() => document.getElementById('my_modal_1').showModal()}>                   
-                    <BannerBtn label="Membership Subscription"></BannerBtn>
-                        </button>
-                    <dialog id="my_modal_1" className="modal">
-                        <div className="modal-box pt-10">
-                           <Payment></Payment>
+                    <button className="mt-8" onClick={() => document.getElementById('my_modal_5').showModal()}>
+
+
+                        <a className="relative cursor-pointer px-5 py-2 font-medium text-black group">
+                            <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-[#085f4f] group-hover:bg-[#0ae0b8] group-hover:skew-x-12"></span>
+                            <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-[#0ae0b8] group-hover:bg-[#0e977e] group-hover:-skew-x-12"></span>
+                            <span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-[#0ae0b8] -rotate-12"></span>
+                            <span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-[#0ae0b8] -rotate-12"></span>
+                            <span className="relative group-hover:text-white">
+                                {/* Membership Subscription {coupons.length} */}
+                                $1000
+                            </span>
+                        </a>
+                    </button>
+
+
+                    {/* Open the modal using document.getElementById('ID').showModal() method */}
+
+                    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                        <div className="modal-box">
+                            <h3 className="font-bold text-lg my-5">Please Provide Coupon Code</h3>
+
+
+                            <form onSubmit={handleCoupon}>
+                                <div className="relative">
+                                    <input type="text" name="coupon" className="w-full p-3 border rounded-md outline-0" placeholder="Coupon Code" />
+                                    <div onClick={() =>
+                                        document.getElementById('my_modal_5').close()} >
+                                        <button onClick={() =>
+                                            document.getElementById('my_modal_1').showModal()} type="submit" className="btn absolute right-0 top-0">
+                                            Submit Coupon
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </form>
+
                             <div className="modal-action">
-                                
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    {/* <button onClick={() =>
+                                        document.getElementById('my_modal_1').showModal()} className="btn">Pay</button> */}
+                                </form>
                             </div>
                         </div>
                     </dialog>
+
+                    <dialog id="my_modal_1" className="modal">
+                        <div className="modal-box pt-10">
+                            <Payment totalAmount={totalAmount}></Payment>
+                            <div className="modal-action">
+
+                            </div>
+                        </div>
+                    </dialog>
+
+
+
                 </div>
             </div>
         </div>

@@ -5,8 +5,9 @@ import Swal from "sweetalert2";
 // import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../../Hooks/useAuth";
+import PropTypes from 'prop-types';
 
-const CheckoutForm = () => {
+const CheckoutForm = ({totalAmount}) => {
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('');
@@ -14,21 +15,21 @@ const CheckoutForm = () => {
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
-    // const [cart] = useCart();
-    // const navigate = useNavigate()
 
-    // const totalPrice = cart.reduce((prev, current) => prev + current.price, 0);
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     if (totalPrice > 0) {
-    //         axiosSecure.post('/create-payment-intent', { price: totalPrice })
-    //         .then(res => {
-    //             console.log(res.data.clientSecret);
-    //             setClientSecret(res.data.clientSecret);
-    //         })
-    //     }
-    // }, [axiosSecure, totalPrice])
+        if (totalAmount > 0) {
+            axiosSecure.post('/create-payment-intent', { price: totalAmount })
+                .then(res => {
+                    console.log(res.data.clientSecret);
+                    setClientSecret(res.data.clientSecret);
+                })
+        }
+    }, [axiosSecure, totalAmount])
+
+
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -79,11 +80,9 @@ const CheckoutForm = () => {
                 // now save the payment in the database
                 const payment = {
                     email: user.email,
-                    // price: totalPrice,
+                    price: totalAmount,
                     transactionId: paymentIntent.id,
                     date: new Date().toLocaleDateString(),
-                    // cartIds: cart.map(item => item._id),
-                    // menuItemIds: cart.map(item => item.menuId),
                     status: 'pending',
                 }
 
@@ -120,11 +119,15 @@ const CheckoutForm = () => {
                     },
                 }}
             />
+
+            {/* disabled={!stripe || !clientSecret} */}
+
             <div className="flex justify-evenly w-full items-center mt-10 border-t border-[#0ae0b8] pt-5">
-                <button className="btn btn-sm btn-primary" type="submit" disabled={!stripe || !clientSecret}>
+                <button  onClick={() => document.getElementById('my_modal_1').close()} className=" btn btn-sm btn-primary" type="submit" >
                     Pay
                 </button>
                 <form method="dialog">
+
                     {/* if there is a button in form, it will close the modal */}
                     <button className="btn btn-sm">Close</button>
                 </form>
@@ -135,4 +138,7 @@ const CheckoutForm = () => {
     );
 };
 
+CheckoutForm.propTypes = {
+    totalAmount: PropTypes.number,
+}
 export default CheckoutForm;

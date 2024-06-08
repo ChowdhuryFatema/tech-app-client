@@ -18,6 +18,7 @@ import Update from "../pages/Dashboard/users/MyProducts/Update";
 import MyProfile from "../pages/Dashboard/users/MyProfile/MyProfile";
 import Statistics from "../pages/Dashboard/Admin/Statistics/Statistics";
 import ManageCoupons from "../pages/Dashboard/Admin/ManageCoupons/ManageCoupons";
+import UpdateCoupon from "../pages/Dashboard/Admin/UpdateCoupon/UpdateCoupon";
 
 const router = createBrowserRouter([
     {
@@ -90,6 +91,11 @@ const router = createBrowserRouter([
         {
           path: 'manageCoupons',
           element: <ManageCoupons></ManageCoupons>
+        },
+        {
+          path: 'updateCoupon/:id',
+          element: <UpdateCoupon></UpdateCoupon>,
+          loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/coupon/${params.id}`)
         }
       ]
     }
