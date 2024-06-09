@@ -13,8 +13,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const Update = () => {
     const myProducts = useLoaderData();
     console.log(myProducts);
-    const { _id, name, description, tags: allTag, externalLink } = myProducts;
-    console.log(allTag);
+    const { _id, name, description, externalLink } = myProducts;
 
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
@@ -50,7 +49,7 @@ const Update = () => {
                         .then(data => {
                             console.log(data.data);
 
-                            if (data.data.insertedId) {
+                            if (data.data.matchedCount > 0) {
                                 Swal.fire({
                                     text: "Product Updated Successfully!",
                                     icon: "success"
