@@ -23,7 +23,6 @@ const MyProfile = () => {
         
     }
    })
-    console.log('payyyyyyyyyy', payments);
 
     const { data: coupons = [] } = useQuery({
         queryKey: ['coupon'],

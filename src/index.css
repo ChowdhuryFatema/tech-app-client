@@ -18,27 +18,6 @@ body {
   border-radius: 0;
 }
 
-/* .active::after {
-  content: "";
-  position: absolute;
-  width: 13px;
-  height: 30%;
-  left: 0;
-  top: 0;
-  border-top: 2px solid #0ae0b8;
-  border-left: 2px solid #0ae0b8;
-} */
-
-/* .active::before {
-  content: "";
-  position: absolute;
-  width: 13px;
-  height: 30%;
-  right: 0;
-  bottom: 0;
-  border-bottom: 2px solid #0ae0b8;
-  border-right: 2px solid #0ae0b8;
-} */
 
 /* navbar end */
 
@@ -219,13 +198,15 @@ span.ReactTags__tag {
 .pagination ul {
   display: flex !important;
 }
-
-.pagination ul li a {
-  padding: 10px;
+.pagination ul li {
+  padding: 8px 20px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .pagination .selected {
-  border: 1px solid red;
+  border: 1px solid #0ae0b8;
+  
 }
 
 /* .review css  */

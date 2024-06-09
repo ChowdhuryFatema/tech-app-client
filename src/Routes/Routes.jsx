@@ -19,6 +19,8 @@ import MyProfile from "../pages/Dashboard/users/MyProfile/MyProfile";
 import Statistics from "../pages/Dashboard/Admin/Statistics/Statistics";
 import ManageCoupons from "../pages/Dashboard/Admin/ManageCoupons/ManageCoupons";
 import UpdateCoupon from "../pages/Dashboard/Admin/UpdateCoupon/UpdateCoupon";
+import AdminRoute from "./AdminRoute";
+import ModeratorRoute from "./ModeratorRoute";
 
 const router = createBrowserRouter([
     {
@@ -73,28 +75,28 @@ const router = createBrowserRouter([
         // moderator route
         {
           path: 'productReview',
-          element: <ProductReview></ProductReview>
+          element: <ModeratorRoute><ProductReview></ProductReview></ModeratorRoute>
         },
         {
           path: 'reportedProducts',
-          element: <ReportedProducts></ReportedProducts>
+          element: <ModeratorRoute><ReportedProducts></ReportedProducts></ModeratorRoute>
         },
         // Admin route
         {
           path: 'statistics',
-          element: <Statistics></Statistics>
+          element: <AdminRoute><Statistics></Statistics></AdminRoute>
         },
         {
           path: 'manageUsers',
-          element: <ManageUsers></ManageUsers>
+          element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
         },
         {
           path: 'manageCoupons',
-          element: <ManageCoupons></ManageCoupons>
+          element: <AdminRoute><ManageCoupons></ManageCoupons></AdminRoute>
         },
         {
           path: 'updateCoupon/:id',
-          element: <UpdateCoupon></UpdateCoupon>,
+          element: <AdminRoute><UpdateCoupon></UpdateCoupon></AdminRoute>,
           loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/coupon/${params.id}`)
         }
       ]

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 import useAuth from "../../../../../Hooks/useAuth";
 import PropTypes from 'prop-types';
+import useAxiosPublic from "../../../../../Hooks/useAxiosPublic";
 
 const CheckoutForm = ({totalAmount, refetch}) => {
     const [error, setError] = useState('');
@@ -14,7 +15,9 @@ const CheckoutForm = ({totalAmount, refetch}) => {
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
+
 
 
     useEffect(() => {
@@ -96,8 +99,12 @@ const CheckoutForm = ({totalAmount, refetch}) => {
                         timer: 1500
                     });
                     refetch();
-                    //   navigate('/dashboard/paymentHistory')
+
                 }
+
+                axiosPublic.patch(`/addAProduct/${user?.email}`, {status: 'Verified'})
+                .then(data => console.log(data.data))
+
                 refetch();
             }
         }

@@ -12,6 +12,7 @@ import ReactPaginate from 'react-paginate';
 const Products = ({ itemsPerPage = 6 }) => {
     const axiosPublic = useAxiosPublic();
     const [search, setSearch] = useState('');
+    
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
@@ -26,9 +27,6 @@ const Products = ({ itemsPerPage = 6 }) => {
     const currentItems = products.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(products.length / itemsPerPage);
 
-
-
-
     const handlePageClick = (event) => {
         const newOffset = (event.selected * itemsPerPage) % products.length;
         console.log(
@@ -36,8 +34,6 @@ const Products = ({ itemsPerPage = 6 }) => {
         );
         setItemOffset(newOffset);
     };
-
-
 
     useEffect(() => {
         refetch()
@@ -55,7 +51,7 @@ const Products = ({ itemsPerPage = 6 }) => {
             <div className="min-h-[100px]">
                 <Navbar></Navbar>
             </div>
-            <div className="max-w-7xl mx-auto px-5">
+            <div className="max-w-7xl mx-auto px-5 my-10">
 
                 <form onSubmit={handleSearch} className="join">
                     <div>
@@ -64,7 +60,7 @@ const Products = ({ itemsPerPage = 6 }) => {
                         </div>
                     </div>
                     <div className="indicator">
-                        <button type="submit" className="btn join-item">Search</button>
+                        <button type="submit" className="btn join-item bg-[#0ae0b8] text-white">Search</button>
                     </div>
                 </form>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">

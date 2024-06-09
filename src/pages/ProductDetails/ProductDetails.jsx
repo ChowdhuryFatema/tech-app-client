@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useProducts from "../../Hooks/useProducts";
 import Navbar from "../../Shared/Navbar";
 import detailsImg from '../../assets/app1.jpg';
@@ -18,6 +18,7 @@ const ProductDetails = () => {
     const { id } = useParams();
     const { products } = useProducts();
     const { user } = useAuth();
+    const navigate = useNavigate();
 
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
@@ -25,7 +26,7 @@ const ProductDetails = () => {
     const { _id, image, name, description, tags = [], email, upvotes } = product;
 
 
-    const { data: reviews = [], refetch } = useQuery({
+    const { data: reviews = [], refetch} = useQuery({
         queryKey: ['reviews'],
         queryFn: async () => {
             const res = await axiosPublic.get('/productReview')
@@ -40,8 +41,24 @@ const ProductDetails = () => {
             .then(data => {
                 console.log(data.data);
                 Swal.fire("Successfully Added to Report");
-
+               
             })
+
+    }
+
+    const handleUpvotes = id => {
+
+        if (user) {
+            axiosPublic.patch(`/productDetails/${id}`)
+                .then(data => {
+                    console.log(data);
+                    // refetch()
+
+                })
+        } else {
+            navigate('/login');
+        }
+
 
     }
 
@@ -64,7 +81,7 @@ const ProductDetails = () => {
                             <div className="space-y-4 col-span-4">
                                 <div className='flex gap-5 justify-between'>
                                     <h2 className="card-title font-semibold">{name}</h2>
-                                    <button className="flex btn flex-col justify-center border border-[#0ae0b8] bg-transparent items-center" disabled={user?.email == email}>
+                                    <button onClick={() => handleUpvotes(_id)} className="flex btn flex-col justify-center border border-[#0ae0b8] bg-transparent items-center" disabled={user?.email == email}>
                                         <BiSolidUpArrow size={20} className='text-[#0ae0b8]' />
                                         <span className='-mt-1'>{upvotes}</span>
                                     </button>

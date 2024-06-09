@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form"
 import BannerBtn from "../../../../components/BannerBtn";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 
 
@@ -15,6 +16,7 @@ const AddProducts = () => {
 
     const { user } = useAuth();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure()
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
 
@@ -55,7 +57,7 @@ const AddProducts = () => {
                     }
                     console.log(newProduct)
 
-                    axiosPublic.post('/products', newProduct)
+                    axiosSecure.post('/products', newProduct)
                         .then(data => {
                             console.log(data.data);
 
@@ -64,8 +66,19 @@ const AddProducts = () => {
                                     text: "Product Added Successfully!",
                                     icon: "success"
                                 });
+
+
+                                const into = {
+                                    email: user?.email,
+                                    status: 'Pending',
+                                }
+                                axiosPublic.post('/addAProduct', into)
+                                .then(data => console.log(data.data))
+                                
                                 reset()
                             }
+
+                            
                         })
                 }
             })

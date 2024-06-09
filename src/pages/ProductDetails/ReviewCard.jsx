@@ -21,7 +21,6 @@ const ReviewCard = ({reviews}) => {
         color.push('#1a75ffb0', '#f3f', '#ffa500', '#ea97be');
     }
 
-   
 
     return (
         <div className="review">

@@ -1,43 +1,33 @@
 import { BiSolidUpArrow } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
 import PropTypes from 'prop-types';
-// import Swal from "sweetalert2";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 
 
 const ProductCard = ({ product, refetch }) => {
     const { _id, name, image, upvotes, tags, email } = product;
     const { user } = useAuth();
-
-    const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
-    const upVoteInfo = {
-        productId: _id,
-        email: user?.email,
-    }
+
+  
 
     const handleUpvotes = id => {
-        axiosSecure.put(`/allProducts/${id}`)
-            .then(data => {
-                console.log(data);
 
-
-
-                axiosPublic.post('/upVote', upVoteInfo)
+        
+        if (user) {
+            axiosPublic.patch(`/allProducts/${id}`)
                 .then(data => {
                     console.log(data);
+                    refetch()
+
                 })
+        } else {
+            navigate('/login');
+        }
 
-                // if (data.data.modifiedCount !== 1) {
-                //     Swal.fire("Upvote Already Added");
-                // }
-                refetch();
-            })
 
-       
-
-            
     }
 
     return (

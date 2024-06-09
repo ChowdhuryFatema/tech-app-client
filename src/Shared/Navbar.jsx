@@ -110,7 +110,7 @@ const Navbar = ({ color, bgColor, logoColor }) => {
 
                                             {
                                                 user && !isAdmin && !isModerator &&
-                                                <Link to="/dashboard/myProducts">Dashboard</Link>
+                                                <Link to="/dashboard/myProfile">Dashboard</Link>
                                             }
                                             {
                                                 isModerator && !isAdmin &&

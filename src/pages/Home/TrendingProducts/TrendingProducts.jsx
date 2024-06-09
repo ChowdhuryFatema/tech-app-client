@@ -1,11 +1,21 @@
 import { Link } from "react-router-dom";
-import useProducts from "../../../Hooks/useProducts";
 import ProductCard from "../../Products/ProductCard";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 
 const TrendingProducts = () => {
 
-    const { products } = useProducts();
+    const axiosPublic = useAxiosPublic();
+
+    const { data: products = [], refetch } = useQuery({
+        queryKey: ['products'],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/allProduct`)
+            return res.data;
+        }
+    })
+    
 
     return (
         <div className="max-w-7xl mx-auto px-5">
@@ -14,7 +24,9 @@ const TrendingProducts = () => {
                 {
                     products.slice(0, 6).map(product => <ProductCard
                         key={product._id}
-                        product={product}></ProductCard>)
+                        product={product}
+                        refetch={refetch}></ProductCard>)
+                        
                 }
             </div>
             <div className="my-20 flex justify-center items-center">
