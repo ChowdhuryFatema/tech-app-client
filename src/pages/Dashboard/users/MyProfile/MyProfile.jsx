@@ -63,13 +63,13 @@ const MyProfile = () => {
 
     return (
         <div className="flex justify-center items-center min-h-screen">
-            <div className="text-center space-y-4 shadow-2xl">
+            <div className="text-center space-y-4 shadow-2xl px-5">
                 <div className="profile-bg flex justify-center items-center py-16 px-20">
-                    <img className="rounded-full w-40 h-40 -mb-32" src={user?.photoURL} />
+                    <img className="rounded-full w-40 h-40 -mb-32 border-2 border-[#0ae0b8]" src={user?.photoURL} />
                 </div>
-                <div className="p-10">
-                    <h2 className="mt-10 lg:text-lg"><span className="font-bold">Name:</span> {user?.displayName}</h2>
-                    <p className="lg:text-lg"><span className="font-bold">Email:</span> {user?.email}</p>
+                <div className="md:px-10 md:py-10 py-8">
+                    <h2 className="mt-10 lg:text-lg text-sm"><span className="font-bold">Name:</span> {user?.displayName}</h2>
+                    <p className="lg:text-lg text-sm"><span className="font-bold">Email:</span> {user?.email}</p>
                     
                     {/* modal  */}
                     <button disabled={payments.length > 0} className="mt-8" onClick={() => document.getElementById('my_modal_5').showModal()}>

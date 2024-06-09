@@ -257,3 +257,8 @@ span.ReactTags__tag {
 
 
 
+@media screen and (max-width: 450px) {
+  .pagination ul li {
+    padding: 5px 12px;
+  }
+}

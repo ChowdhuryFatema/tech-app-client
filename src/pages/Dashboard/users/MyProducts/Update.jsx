@@ -103,7 +103,7 @@ const Update = () => {
                 <title>Tech Apps | Update Product</title>
             </Helmet>
             <div className="bg-[#E5E7EB]">
-                <div className="max-w-5xl mx-auto px-5 py-16">
+                <div className="max-w-5xl mx-auto px-5 md:px-10 py-8 md:py-16">
                     <div className="mb-8">
                         <h2 className="text-red text-3xl md:text-5xl text-red font-semibold text-center">Update Product</h2>
                     </div>

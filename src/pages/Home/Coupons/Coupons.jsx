@@ -55,7 +55,7 @@ const Coupons = () => {
 
                                 {
                                     coupon.map(c => <SwiperSlide key={c._id}>
-                                        <div className="card bg-base-100 shadow-xl md:py-10 md:px-5">
+                                        <div className="card bg-base-100 shadow-xl md:py-10 md:px-5 my-5 md:my-10">
                                             <div className="card-body items-center text-center">
                                                 <p className='text-5xl mg:text-6xl lg:text-7xl font-bold text-red-500'>{c.discountAmount}%</p>
                                             <h2 className="card-title text-2xl smd:text-3xl lg:text-4xl font-semibold ">Code:

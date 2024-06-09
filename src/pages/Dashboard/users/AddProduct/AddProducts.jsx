@@ -77,6 +77,13 @@ const AddProducts = () => {
                                 
                                 reset()
                             }
+                            if(data.data.insertedId == null){
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: "Please Subscribe For Add Unlimited Products!",
+                                  });
+                            }
 
                             
                         })
@@ -125,7 +132,7 @@ const AddProducts = () => {
                 <title>Tech Apps | Add Product</title>
             </Helmet>
             <div className="bg-[#E5E7EB]">
-                <div className="mx-auto px-10 py-16">
+                <div className="mx-auto px-5 md:px-10 py-8 md:py-16">
                     <div className="mb-8">
                         <h2 className="text-red text-3xl md:text-5xl text-red font-semibold text-center">Add Product</h2>
                     </div>

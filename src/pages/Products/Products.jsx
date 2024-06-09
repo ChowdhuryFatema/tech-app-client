@@ -12,7 +12,7 @@ import ReactPaginate from 'react-paginate';
 const Products = ({ itemsPerPage = 6 }) => {
     const axiosPublic = useAxiosPublic();
     const [search, setSearch] = useState('');
-    
+
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
@@ -51,18 +51,20 @@ const Products = ({ itemsPerPage = 6 }) => {
             <div className="min-h-[100px]">
                 <Navbar></Navbar>
             </div>
-            <div className="max-w-7xl mx-auto px-5 my-10">
+            <div className="max-w-7xl mx-auto px-5 my-5 md:my-10">
 
-                <form onSubmit={handleSearch} className="join">
-                    <div>
+                <div className="flex justify-center pb-5">
+                    <form onSubmit={handleSearch} className="join">
                         <div>
-                            <input className="input input-bordered join-item" placeholder="Search" name="search" />
+                            <div>
+                                <input className="input input-bordered join-item" placeholder="Search" name="search" />
+                            </div>
                         </div>
-                    </div>
-                    <div className="indicator">
-                        <button type="submit" className="btn join-item bg-[#0ae0b8] text-white">Search</button>
-                    </div>
-                </form>
+                        <div className="indicator">
+                            <button type="submit" className="btn join-item bg-[#0ae0b8] text-white">Search</button>
+                        </div>
+                    </form>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
                     {currentItems &&
                         currentItems.map((product) => (

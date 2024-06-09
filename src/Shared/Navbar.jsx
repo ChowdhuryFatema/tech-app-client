@@ -70,7 +70,7 @@ const Navbar = ({ color, bgColor, logoColor }) => {
                         </div>
                         <Link to="/" className="flex items-center gap-2">
                             <img className='w-5 lg:w-10 animate-spin' src={logo} />
-                            <span className={`text-xl md:text-2xl lg:text-3xl font-bold ${logoColor}`}>Tech Apps</span>
+                            <span className={`text-lg md:text-2xl lg:text-3xl font-bold ${logoColor}`}>Tech Apps</span>
                         </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
