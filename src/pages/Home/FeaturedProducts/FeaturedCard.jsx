@@ -2,20 +2,20 @@ import PropTypes from 'prop-types';
 import { BiSolidUpArrow } from "react-icons/bi";
 import useAuth from '../../../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 // import Swal from 'sweetalert2';
 
 const FeaturedCard = ({ feature, refetch }) => {
     const navigate = useNavigate();
     const { user } = useAuth()
     const { _id, image, name, tags, upvotes, email } = feature;
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
 
     const handleUpvotes = id => {
         console.log(id);
 
         if (user) {
-            axiosSecure.patch(`/featured/${id}`)
+            axiosPublic.patch(`/featured/${id}`)
                 .then(data => {
                     console.log(data.data);
                     refetch();
