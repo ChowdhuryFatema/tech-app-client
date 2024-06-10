@@ -1,5 +1,6 @@
 
 import Navbar from "../../Shared/Navbar";
+import AskedQuestions from "./AskedQuestions/AskedQuestions";
 import Banner from "./Banner/Banner";
 import Coupons from "./Coupons/Coupons";
 import FeaturedProducts from "./FeaturedProducts/FeaturedProducts";
@@ -17,8 +18,9 @@ const Home = () => {
             </div>
             <Banner></Banner>
             <FeaturedProducts></FeaturedProducts>
-            <Coupons></Coupons>
             <TrendingProducts></TrendingProducts>
+            <Coupons></Coupons>
+            <AskedQuestions></AskedQuestions>
         </div>
     );
 };
