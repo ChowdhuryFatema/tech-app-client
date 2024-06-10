@@ -54,10 +54,10 @@ const Products = ({ itemsPerPage = 6 }) => {
             <div className="max-w-7xl mx-auto px-5 my-5 md:my-10">
 
                 <div className="flex justify-center pb-5">
-                    <form onSubmit={handleSearch} className="join">
+                    <form onSubmit={handleSearch} className="join w-full">
                         <div>
                             <div>
-                                <input className="input input-bordered join-item" placeholder="Search" name="search" />
+                                <input className="input input-bordered join-item w-full" placeholder="Search" name="search" />
                             </div>
                         </div>
                         <div className="indicator">

@@ -68,15 +68,15 @@ const ProductDetails = () => {
                 <Navbar bgColor="bg-white"></Navbar>
             </div>
             <div>
-                <img className="h-80 w-full object-cover -mt-5" src={detailsImg} alt="" />
+                <img className="h-40 md:h-60 lg:h-80 w-full object-cover -mt-5" src={detailsImg} alt="" />
             </div>
             <div className="max-w-7xl mx-auto px-5">
 
-                <div className="grid grid-cols-7 gap-5 my-10">
-                    <div className="col-auto md:col-span-5">
-                        <div className="grid grid-cols-7 gap-5 ">
+                <div className="grid grid-cols-1 lg:grid-cols-7 gap-5 my-10">
+                    <div className="col-auto lg:col-span-5">
+                        <div className="grid grid-cols-1 lg:grid-cols-7  gap-y-5 lg:gap-y-0 lg:gap-5 ">
                             <div className="col-span-3">
-                                <img className="w-full" src={image} />
+                                <img className="w-full object-cover" src={image} />
                             </div>
                             <div className="space-y-4 col-span-4">
                                 <div className='flex gap-5 justify-between'>
@@ -103,9 +103,9 @@ const ProductDetails = () => {
                         </div>
 
                     </div>
-                    <div className="col-auto md:col-span-2">
+                    <div className="col-auto lg:col-span-2">
                         <section className="dark:text-gray-800">
-                            <form noValidate="" className="container w-full max-w-xl px-5 py-8 mx-auto bg-gray-100 space-y-2 rounded-md shadow dark:bg-gray-50">
+                            <form noValidate="" className="container w-full px-5 py-8 mx-auto bg-gray-100 space-y-2 rounded-md shadow dark:bg-gray-50">
                                 <h2 className="w-full text-3xl font-bold leading-tight">Contact us</h2>
                                 <div>
                                     <label htmlFor="name" className="block mb-1 ml-1">Name</label>

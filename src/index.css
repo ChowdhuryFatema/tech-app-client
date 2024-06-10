@@ -261,4 +261,8 @@ span.ReactTags__tag {
   .pagination ul li {
     padding: 5px 12px;
   }
+  /* banner slider  */
+  .slider img {
+    height: 60vh !important;
+  }
 }

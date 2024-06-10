@@ -80,7 +80,7 @@ const MyProfile = () => {
                             <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-[#0ae0b8] group-hover:bg-[#0e977e] group-hover:-skew-x-12"></span>
                             <span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-[#0ae0b8] -rotate-12"></span>
                             <span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-[#0ae0b8] -rotate-12"></span>
-                            <span className="relative group-hover:text-white">
+                            <span className="relative text-white text-sm">
                                 {payments.length > 0 ? 'Already Subscribed': 'Membership Subscription $1000'}
                                 
                             </span>
@@ -101,7 +101,7 @@ const MyProfile = () => {
                                     <div onClick={() =>
                                         document.getElementById('my_modal_5').close()} >
                                         <button onClick={() =>
-                                            document.getElementById('my_modal_1').showModal()} type="submit" className="btn absolute right-0 top-0">
+                                            document.getElementById('my_modal_1').showModal()} type="submit" className="btn absolute right-0 top-[1px] bg-[#0ae0b8] text-white">
                                             Submit Coupon
                                         </button>
                                     </div>
@@ -111,9 +111,7 @@ const MyProfile = () => {
 
                             <div className="modal-action">
                                 <form method="dialog">
-                                    {/* if there is a button in form, it will close the modal */}
-                                    {/* <button onClick={() =>
-                                        document.getElementById('my_modal_1').showModal()} className="btn">Pay</button> */}
+                                  
                                 </form>
                             </div>
                         </div>

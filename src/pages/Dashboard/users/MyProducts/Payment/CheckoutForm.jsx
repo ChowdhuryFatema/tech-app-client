@@ -134,13 +134,13 @@ const CheckoutForm = ({totalAmount, refetch}) => {
             {/* disabled={!stripe || !clientSecret} */}
 
             <div className="flex justify-evenly w-full items-center mt-10 border-t border-[#0ae0b8] pt-5">
-                <button  onClick={() => document.getElementById('my_modal_1').close()} className=" btn btn-sm btn-primary" type="submit" >
+                <button  onClick={() => document.getElementById('my_modal_1').close()} className=" btn btn-sm bg-[#0ae0b8] text-white" type="submit" >
                     Pay
                 </button>
                 <form method="dialog">
 
                     {/* if there is a button in form, it will close the modal */}
-                    <button className="btn btn-sm">Close</button>
+                    <button className="btn btn-sm border border-[#0ae0b8] bg-transparent">Close</button>
                 </form>
             </div>
             <p className="text-red-500">{error}</p>

@@ -6,6 +6,7 @@ import useProducts from "../../../../Hooks/useProducts";
 import { MdOutlinePreview } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { RiAlignItemBottomLine } from "react-icons/ri";
+import AdminCalender from "./AdminCalender/AdminCalender";
 
 
 const Statistics = () => {
@@ -66,11 +67,13 @@ const Statistics = () => {
             </div>
 
 
-            <div className="flex flex-col justify-center items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                 <AdminPieChart
                     products={products}
                     reviews={reviews}
                     users={users}></AdminPieChart>
+
+                <AdminCalender></AdminCalender>
             </div>
         </div>
     );
