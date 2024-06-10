@@ -1,3 +1,4 @@
+
 import Navbar from "../../Shared/Navbar";
 import Banner from "./Banner/Banner";
 import Coupons from "./Coupons/Coupons";
@@ -7,6 +8,7 @@ import TrendingProducts from "./TrendingProducts/TrendingProducts";
 
 
 const Home = () => {
+
     return (
         <div>
             <div className="fixed w-full top-0 left-0 z-50 ">

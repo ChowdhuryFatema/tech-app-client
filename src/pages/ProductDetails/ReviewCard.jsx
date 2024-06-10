@@ -13,14 +13,7 @@ import 'swiper/css/pagination';
 
 const ReviewCard = ({reviews}) => {
 
-    const colors = ['#1a75ffb0', '#f3f', '#ffa500', '#ea97be']
-
-    const color = [];
-
-    for (let i = 0; i < colors.length; i++) {
-        color.push('#1a75ffb0', '#f3f', '#ffa500', '#ea97be');
-    }
-
+    const colors = ['#1a75ffb0', '#f3f', '#ffa500', '#ea97be'];
 
     return (
         <div className="review">
@@ -58,33 +51,36 @@ const ReviewCard = ({reviews}) => {
                     modules={[EffectCoverflow, Pagination]}
                     className="mySwiper"
                 >
-
                     {
-                        reviews.map((review, idx) => <SwiperSlide key={idx}>
-
-                            <div className="card w-96 bg-base-100 shadow-xl rounded-xl my-16">
-                                <div className={`w-full bg-[${color[idx]}] rounded-t-xl`}>
-                                    <figure className="-mb-14 pt-10">
-                                        <img src={review.reviewerImage} className="rounded-full w-32 h-32 object-cover" />
-                                    </figure>
-                                </div>
-                                <div className="card-body items-center text-center mt-10">
-                                    <h2 className="card-title">{review.reviewerName}</h2>
-                                    <p className="text-[#8a8484] text-sm">{review.description}</p>
-                                    <div className="card-actions">
-                                        <span>
-                                            <Rating
-                                                initialRating={review.rating}
-                                                readonly
-                                                emptySymbol={<IoIosStarOutline size={24} className="text-[#C9CAC9]" />}
-                                                fullSymbol={<IoIosStar size={24} className="text-[#F2E650]" />}
-                                            /></span>
+                        reviews.map((review, idx) => {
+                            const bgColor = colors[idx % colors.length];
+                            return (
+                                <SwiperSlide key={idx}>
+                                    <div className="card w-96 bg-base-100 shadow-xl rounded-2xl my-16">
+                                        <div className="w-full py-5" style={{ backgroundColor: bgColor, borderRadius: '1rem 1rem 0 0' }}>
+                                            <figure className="-mb-14 pt-10">
+                                                <img src={review.reviewerImage} className="rounded-full w-32 h-32 object-cover" />
+                                            </figure>
+                                        </div>
+                                        <div className="card-body items-center text-center mt-10">
+                                            <h2 className="card-title">{review.reviewerName}</h2>
+                                            <p className="text-[#8a8484] text-sm">{review.description}</p>
+                                            <div className="card-actions">
+                                                <span>
+                                                    <Rating
+                                                        initialRating={review.rating}
+                                                        readonly
+                                                        emptySymbol={<IoIosStarOutline size={24} className="text-[#C9CAC9]" />}
+                                                        fullSymbol={<IoIosStar size={24} className="text-[#F2E650]" />}
+                                                    />
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </SwiperSlide>)
+                                </SwiperSlide>
+                            )
+                        })
                     }
-
                 </Swiper>
             </div>
         </div>
@@ -92,6 +88,7 @@ const ReviewCard = ({reviews}) => {
 };
 
 ReviewCard.propTypes = {
-    reviews: PropTypes.array,
-}
+    reviews: PropTypes.array.isRequired,
+};
+
 export default ReviewCard;

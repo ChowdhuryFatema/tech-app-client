@@ -76,7 +76,7 @@ const ProductDetails = () => {
                     <div className="col-auto lg:col-span-5">
                         <div className="grid grid-cols-1 lg:grid-cols-7  gap-y-5 lg:gap-y-0 lg:gap-5 ">
                             <div className="col-span-3">
-                                <img className="w-full object-cover" src={image} />
+                                <img className="w-full object-cover rounded-3xl" src={image} />
                             </div>
                             <div className="space-y-4 col-span-4">
                                 <div className='flex gap-5 justify-between'>
