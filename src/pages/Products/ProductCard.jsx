@@ -12,10 +12,7 @@ const ProductCard = ({ product, refetch }) => {
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
 
-
-
     const handleUpvotes = id => {
-
 
         if (user) {
             axiosSecure.patch(`/allProducts/${id}`)

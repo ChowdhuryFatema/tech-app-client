@@ -1,5 +1,6 @@
 
 import Navbar from "../../Shared/Navbar";
+import AllApp from "./AllApp/AllApp";
 import AskedQuestions from "./AskedQuestions/AskedQuestions";
 import Banner from "./Banner/Banner";
 import Coupons from "./Coupons/Coupons";
@@ -18,6 +19,7 @@ const Home = () => {
             </div>
             <Banner></Banner>
             <FeaturedProducts></FeaturedProducts>
+            <AllApp></AllApp>
             <TrendingProducts></TrendingProducts>
             <Coupons></Coupons>
             <AskedQuestions></AskedQuestions>
