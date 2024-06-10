@@ -5,24 +5,25 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import LoadingSpinner from "../../../../components/LoadingSpinner";
+import { ImSpinner9 } from "react-icons/im";
 
 
 const MyProfile = () => {
 
     const { user } = useAuth();
-    // const [coupon, setCoupon] = useState(null);
+    const [loading, setLoading] = useState(false)
     const [totalAmount, setTotalAmount] = useState(0)
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
 
-   const {data: payments=[], refetch, isLoading} = useQuery({
-    queryKey: ['payments'],
-    queryFn: async () => {
-        const res = await axiosSecure.get(`/payments/${user?.email}`)
-        return res.data;
-        
-    }
-   })
+    const { data: payments = [], refetch, isLoading } = useQuery({
+        queryKey: ['payments'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/payments/${user?.email}`)
+            return res.data;
+
+        }
+    })
 
     const { data: coupons = [] } = useQuery({
         queryKey: ['coupon'],
@@ -32,7 +33,7 @@ const MyProfile = () => {
         }
     })
 
-   
+
 
     const handleCoupon = e => {
         e.preventDefault();
@@ -57,7 +58,8 @@ const MyProfile = () => {
         }
     }
 
-    if(isLoading){
+
+    if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }
 
@@ -70,19 +72,35 @@ const MyProfile = () => {
                 <div className="md:px-10 md:py-10 py-8">
                     <h2 className="mt-10 lg:text-lg text-sm"><span className="font-bold">Name:</span> {user?.displayName}</h2>
                     <p className="lg:text-lg text-sm"><span className="font-bold">Email:</span> {user?.email}</p>
-                    
+
                     {/* modal  */}
                     <button disabled={payments.length > 0} className="mt-8" onClick={() => document.getElementById('my_modal_5').showModal()}>
 
 
-                        <a className="relative cursor-pointer px-5 py-2 font-medium text-black group md:text-lg">
+                        {/* <a className="relative cursor-pointer px-5 py-2 font-medium text-black group md:text-lg">
                             <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-[#085f4f] group-hover:bg-[#0ae0b8] group-hover:skew-x-12"></span>
                             <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-[#0ae0b8] group-hover:bg-[#0e977e] group-hover:-skew-x-12"></span>
                             <span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-[#0ae0b8] -rotate-12"></span>
                             <span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-[#0ae0b8] -rotate-12"></span>
                             <span className="relative text-white text-sm">
-                                {payments.length > 0 ? 'Already Subscribed': 'Membership Subscription $1000'}
-                                
+                                {loading ? <ImSpinner9 className="text-3xl animate-ping block w-16" /> :
+
+                                    (payments.length > 0 ? 'Already Subscribed' : 'Membership Subscription $1000')
+                                }
+                            </span>
+                        </a> */}
+
+
+
+                        <a className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-[#0ae0b8] rounded hover:bg-[#0ae0b8] group">
+                            <span className="w-48 h-48 rounded rotate-[-40deg] bg-[#0e977e] absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                            <span className="relative w-full text-left text-white transition-colors duration-300 ease-in-out group-hover:text-white">
+
+
+                                {loading ? <ImSpinner9 className="text-xl animate-spin" /> :
+
+                                    (payments.length > 0 ? 'Already Subscribed' : 'Membership Subscription $1000')
+                                }
                             </span>
                         </a>
                     </button>
@@ -111,7 +129,7 @@ const MyProfile = () => {
 
                             <div className="modal-action">
                                 <form method="dialog">
-                                  
+
                                 </form>
                             </div>
                         </div>
@@ -119,7 +137,7 @@ const MyProfile = () => {
 
                     <dialog id="my_modal_1" className="modal">
                         <div className="modal-box pt-10">
-                            <Payment totalAmount={totalAmount} refetch={refetch}></Payment>
+                            <Payment totalAmount={totalAmount} refetch={refetch} setLoading={setLoading}></Payment>
                             <div className="modal-action">
 
                             </div>

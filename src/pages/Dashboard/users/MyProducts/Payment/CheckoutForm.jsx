@@ -8,7 +8,7 @@ import useAuth from "../../../../../Hooks/useAuth";
 import PropTypes from 'prop-types';
 import useAxiosPublic from "../../../../../Hooks/useAxiosPublic";
 
-const CheckoutForm = ({totalAmount, refetch}) => {
+const CheckoutForm = ({totalAmount, refetch, setLoading}) => {
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('');
@@ -37,6 +37,8 @@ const CheckoutForm = ({totalAmount, refetch}) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        setLoading(true)
 
         if (!stripe || !elements) {
             return
@@ -92,7 +94,7 @@ const CheckoutForm = ({totalAmount, refetch}) => {
 
                 const res = await axiosSecure.post('/payments', payment);
                 console.log(res.data);
-                if (res.data?.paymentResult?.insertedId) {
+                if (res.data?.insertedId) {
                     Swal.fire({
                         icon: "success",
                         title: "Thanks for the payment",
@@ -100,11 +102,12 @@ const CheckoutForm = ({totalAmount, refetch}) => {
                         timer: 1500
                     });
                     refetch();
-
+                    setLoading(false)
+                   
                 }
 
                 axiosPublic.patch(`/addAProduct/${user?.email}`, {status: 'Verified'})
-                .then(data => console.log(data.data))
+                .then(data => console.log(data))
 
                 refetch();
             }
@@ -152,5 +155,6 @@ const CheckoutForm = ({totalAmount, refetch}) => {
 CheckoutForm.propTypes = {
     totalAmount: PropTypes.number,
     refetch: PropTypes.func,
+    setLoading: PropTypes.func,
 }
 export default CheckoutForm;
