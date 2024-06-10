@@ -2,24 +2,44 @@ import PropTypes from 'prop-types';
 import { BiSolidUpArrow } from "react-icons/bi";
 import useAuth from '../../../Hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 // import Swal from 'sweetalert2';
 
 const FeaturedCard = ({ feature, refetch }) => {
     const navigate = useNavigate();
     const { user } = useAuth()
     const { _id, image, name, tags, upvotes, email } = feature;
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     const handleUpvotes = id => {
         console.log(id);
 
         if (user) {
-            axiosPublic.patch(`/featured/${id}`)
+            axiosSecure.patch(`/featured/${id}`)
                 .then(data => {
                     console.log(data.data);
                     refetch();
+
+
+                    const upvoteInfo = {
+                        email: user?.email,
+                        productId: _id,
+                    }
+
+                    axiosSecure.post(`/upvotes/${_id}`, upvoteInfo)
+                    .then(data => {
+                        if(data.data.insertedId == null){
+                            Swal.fire({
+                                text: "You can add just 1 vote per product!",
+                                icon: "success"
+                            });
+                        }
+                    });
+
+
                 })
+               
 
         }
         else {

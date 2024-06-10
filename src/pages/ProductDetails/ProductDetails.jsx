@@ -22,6 +22,7 @@ const ProductDetails = () => {
 
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
+    
     const product = products.find(pro => pro._id === id) || {};
     const { _id, image, name, description, tags = [], email, upvotes } = product;
 
@@ -52,7 +53,7 @@ const ProductDetails = () => {
             axiosPublic.patch(`/productDetails/${id}`)
                 .then(data => {
                     console.log(data);
-                    // refetch()
+                    refetch()
 
                 })
         } else {

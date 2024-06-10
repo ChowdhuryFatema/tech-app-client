@@ -1,28 +1,44 @@
 import { BiSolidUpArrow } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
 import PropTypes from 'prop-types';
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 
 const ProductCard = ({ product, refetch }) => {
     const { _id, name, image, upvotes, tags, email } = product;
     const { user } = useAuth();
     const navigate = useNavigate();
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
-  
+
 
     const handleUpvotes = id => {
 
-        
+
         if (user) {
-            axiosPublic.patch(`/allProducts/${id}`)
+            axiosSecure.patch(`/allProducts/${id}`)
                 .then(data => {
                     console.log(data);
                     refetch()
 
+                    const upvoteInfo = {
+                        email: user?.email,
+                        productId: _id,
+                    }
+
+                    axiosSecure.post(`/upvotes/${_id}`, upvoteInfo)
+                    .then(data => {
+                        if(data.data.insertedId == null){
+                            Swal.fire({
+                                text: "You can add just 1 vote per product!",
+                                icon: "success"
+                            });
+                        }
+                    });
                 })
+
         } else {
             navigate('/login');
         }
@@ -46,9 +62,12 @@ const ProductCard = ({ product, refetch }) => {
                 </ul>
 
                 <div className="card-actions">
-                    <button onClick={() => handleUpvotes(_id)} className="flex btn flex-col justify-center border border-[#0ae0b8] bg-transparent items-center" disabled={user?.email == email}>
+                    <button onClick={() => handleUpvotes(_id)} className="flex btn justify-center border border-[#0ae0b8] bg-transparent items-center" disabled={user?.email == email}>
                         <BiSolidUpArrow size={20} className='text-[#0ae0b8]' />
-                        <span className='-mt-1'>{upvotes}</span>
+                        <span>{upvotes}</span>
+                    </button>
+                    <button className="btn bg-green-100 text-green-600">
+                        <Link to={`/productDetails/${_id}`}>View Details</Link>
                     </button>
                 </div>
             </div>

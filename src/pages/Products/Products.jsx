@@ -88,7 +88,6 @@ const Products = ({ itemsPerPage = 6 }) => {
                         itemsPerPage={6}
                     />
                 </div>
-
             </div>
         </>
     );
