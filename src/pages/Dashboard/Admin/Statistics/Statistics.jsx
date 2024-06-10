@@ -67,7 +67,7 @@ const Statistics = () => {
             </div>
 
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div className="flex flex-col md:flex-row justify-center lg:justify-evenly gap-y-5 lg:gap-y-0 lg:gap-5 items-center">
                 <AdminPieChart
                     products={products}
                     reviews={reviews}

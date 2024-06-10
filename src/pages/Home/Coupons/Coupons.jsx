@@ -32,11 +32,11 @@ const Coupons = () => {
     return (
         <div className='max-w-7xl mx-auto px-5'>
             <div className='coupon-bg'>
-                <div className='bg-black bg-opacity-70 p-5 md:p-10 lg:p-20'>
-                    <div className='grid grid-cols-1 md:grid-cols-2'>
+                <div className='bg-black bg-opacity-70 p-5 md:p-10 lg:p-16'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                         <div>
                             <div className='flex items-center justify-center h-full w-full'>
-                                <h2 className='uppercase text-5xl md:text-6xl lg:text-8xl font-bold text-center py-10'>
+                                <h2 className='merienda uppercase text-5xl md:text-6xl lg:text-8xl font-bold text-center py-10'>
                                     <span className='text text-white'>discount</span> <br />
                                     <span className='text-yellow-500'>offer</span>
                                 </h2>
