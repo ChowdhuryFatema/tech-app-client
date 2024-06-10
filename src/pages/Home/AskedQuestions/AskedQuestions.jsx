@@ -59,7 +59,7 @@ const AskedQuestions = () => {
                     </div>
                 </div>
                 <div className="col-auto lg:col-span-1">
-                    <img src={FAQImg} alt="" />
+                    <img  data-aos="zoom-in" src={FAQImg} alt="" />
                 </div>
             </div>
         </div>

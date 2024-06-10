@@ -36,7 +36,7 @@ const Coupons = () => {
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                         <div>
                             <div className='flex items-center justify-center h-full w-full'>
-                                <h2 className='merienda uppercase text-5xl md:text-6xl lg:text-8xl font-bold text-center py-10'>
+                                <h2 data-aos="flip-left" data-aos-duration="500" className='merienda uppercase text-5xl md:text-6xl lg:text-8xl font-bold text-center py-10'>
                                     <span className='text text-white'>discount</span> <br />
                                     <span className='text-yellow-500'>offer</span>
                                 </h2>

@@ -49,7 +49,7 @@ const FeaturedCard = ({ feature, refetch }) => {
     }
 
     return (
-        <div className='shadow-lg duration-500'>
+        <div className='shadow-lg duration-500' data-aos="fade-up"   data-aos-duration="500">
             <div className="card card-side flex-col lg:flex-row">
                 <figure className='flex justify-center items-center'>
                     <img className='w-20 ml-5 rounded-2xl' src={image} alt="Movie" />

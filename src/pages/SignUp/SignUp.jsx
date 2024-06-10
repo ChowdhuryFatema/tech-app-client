@@ -82,7 +82,7 @@ const SignUp = () => {
             <Navbar bgColor="bg-white"></Navbar>
             <div className="max-w-3xl mx-auto px-5 my-10 md:my-20">
 
-                <div className="sign-up rounded-md" >
+                <div className="sign-up rounded-md" data-aos="zoom-in" data-aos-duration="500">
                     <div className="bg-black bg-opacity-20 p-10">
                         <div className="mb-10 space-y-2">
                             <h2 className="text-4xl md:text-5xl font-bold heading text-center text-white">Sign Up</h2>

@@ -44,7 +44,7 @@ const ProductCard = ({ product, refetch }) => {
     }
 
     return (
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl" data-aos="zoom-in" data-aos-duration="500">
             <figure className="px-10 pt-10">
                 <img src={image} alt="Shoes" className="rounded-3xl" />
             </figure>
