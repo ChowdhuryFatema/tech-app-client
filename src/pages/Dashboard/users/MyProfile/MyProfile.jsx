@@ -64,7 +64,7 @@ const MyProfile = () => {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen">
+        <div className="flex justify-center items-center min-h-[80vh]">
             <div className="text-center space-y-4 shadow-2xl px-5">
                 <div className="profile-bg flex justify-center items-center py-16 px-20">
                     <img className="rounded-full w-40 h-40 -mb-32 border-2 border-[#0ae0b8]" src={user?.photoURL} />

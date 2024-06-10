@@ -97,7 +97,7 @@ const CheckoutForm = ({totalAmount, refetch, setLoading}) => {
                 if (res.data?.insertedId) {
                     Swal.fire({
                         icon: "success",
-                        title: "Thanks for the payment",
+                        title: `Thanks for the ${totalAmount} payment`,
                         showConfirmButton: false,
                         timer: 1500
                     });

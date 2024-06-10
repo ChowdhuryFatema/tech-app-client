@@ -15,96 +15,86 @@ const Banner = () => {
     return (
         <div>
             <Carousel>
-                <div>
-                    <div className="relative">
-                        <img src={img1} className="object-center" />
-                        <div className="absolute top-1/4 left-2/4 -translate-x-[50%] bg-black bg-opacity-70 p-10 w-full md:w-3/4 lg:w-1/2">
-                            <div className="space-y-5">
-                                <h2 className="text-3xl md:text-4xl lg:text-6xl text-white font-bold">
-                                    Tech Web <span className="text-[#0ae0b8]">Apps</span>
-                                </h2>
-                                <p className="text-white opacity-80">
-                                    TechConnect is a dynamic web app that connects tech enthusiasts and professionals through forums, tutorials, and collaborative opportunities.
-                                </p>
-                                <div className="pt-4">
-                                    <BannerBtn label="Explore"></BannerBtn>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className="relative">
-                        <img src={img2} className="object-center" />
-                        <div className="absolute top-1/4 left-2/4 -translate-x-[50%] bg-black bg-opacity-70 p-10 w-full md:w-3/4 lg:w-1/2">
-                            <div className="space-y-5">
-                                <h2 className="text-3xl md:text-4xl lg:text-6xl text-white font-bold">
-                                    Tech Web <span className="text-[#0ae0b8]">Apps</span>
-                                </h2>
-                                <p className="text-white opacity-80">
-                                    TechConnect is a dynamic web app that connects tech enthusiasts and professionals through forums, tutorials, and collaborative opportunities.
-                                </p>
-                                <div className="pt-4">
-                                    <BannerBtn label="Explore"></BannerBtn>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className="relative">
-                        <img src={img3} className="object-center" />
-                        <div className="absolute top-1/4 left-2/4 -translate-x-[50%] bg-black bg-opacity-70 p-10 w-full md:w-3/4 lg:w-1/2">
-                            <div className="space-y-5">
-                                <h2 className="text-3xl md:text-4xl lg:text-6xl text-white font-bold">
-                                    Tech Web <span className="text-[#0ae0b8]">Apps</span>
-                                </h2>
-                                <p className="text-white opacity-80">
-                                    TechConnect is a dynamic web app that connects tech enthusiasts and professionals through forums, tutorials, and collaborative opportunities.
-                                </p>
-                                <div className="pt-4">
-                                    <BannerBtn label="Explore"></BannerBtn>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className="relative">
-                        <img src={img4} className="object-center" />
-                        <div className="absolute top-1/4 left-2/4 -translate-x-[50%] bg-black bg-opacity-70 p-10 w-full md:w-3/4 lg:w-1/2">
-                            <div className="space-y-5">
-                                <h2 className="text-3xl md:text-4xl lg:text-6xl text-white font-bold">
-                                    Tech Web <span className="text-[#0ae0b8]">Apps</span>
-                                </h2>
-                                <p className="text-white opacity-80">
-                                    TechConnect is a dynamic web app that connects tech enthusiasts and professionals through forums, tutorials, and collaborative opportunities.
-                                </p>
-                                <div className="pt-4">
-                                    <BannerBtn label="Explore"></BannerBtn>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className="relative">
-                        <img src={img5} className="object-center" />
-                        <div className="absolute top-1/4 left-2/4 -translate-x-[50%] bg-black bg-opacity-70 p-10 w-full md:w-3/4 lg:w-1/2">
-                            <div className="space-y-5">
-                                <h2 className="text-3xl md:text-4xl lg:text-6xl text-white font-bold">
-                                    Tech Web <span className="text-[#0ae0b8]">Apps</span>
-                                </h2>
-                                <p className="text-white opacity-80">
-                                    TechConnect is a dynamic web app that connects tech enthusiasts and professionals through forums, tutorials, and collaborative opportunities.
-                                </p>
-                                <div className="pt-4">
-                                    <BannerBtn label="Explore"></BannerBtn>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
+                <div className="relative">
+                    <img src={img1} className="object-center" />
+                    <div className="absolute top-1/4 left-2/4 -translate-x-[50%] bg-black bg-opacity-70 p-10 w-full md:w-3/4 lg:w-1/2">
+                        <div className="space-y-5">
+                            <h2 className="text-3xl md:text-4xl lg:text-6xl text-white font-bold">
+                                Tech Web <span className="text-[#0ae0b8]">Apps</span>
+                            </h2>
+                            <p className="text-white opacity-80">
+                                TechConnect is a dynamic web app that connects tech enthusiasts and professionals through forums, tutorials, and collaborative opportunities.
+                            </p>
+                            <div className="pt-4">
+                                <BannerBtn label="Explore"></BannerBtn>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="relative">
+                    <img src={img2} className="object-center" />
+                    <div className="absolute top-1/4 left-2/4 -translate-x-[50%] bg-black bg-opacity-70 p-10 w-full md:w-3/4 lg:w-1/2">
+                        <div className="space-y-5">
+                            <h2 className="text-3xl md:text-4xl lg:text-6xl text-white font-bold">
+                                Tech Web <span className="text-[#0ae0b8]">Apps</span>
+                            </h2>
+                            <p className="text-white opacity-80">
+                                TechConnect is a dynamic web app that connects tech enthusiasts and professionals through forums, tutorials, and collaborative opportunities.
+                            </p>
+                            <div className="pt-4">
+                                <BannerBtn label="Explore"></BannerBtn>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="relative">
+                    <img src={img3} className="object-center" />
+                    <div className="absolute top-1/4 left-2/4 -translate-x-[50%] bg-black bg-opacity-70 p-10 w-full md:w-3/4 lg:w-1/2">
+                        <div className="space-y-5">
+                            <h2 className="text-3xl md:text-4xl lg:text-6xl text-white font-bold">
+                                Tech Web <span className="text-[#0ae0b8]">Apps</span>
+                            </h2>
+                            <p className="text-white opacity-80">
+                                TechConnect is a dynamic web app that connects tech enthusiasts and professionals through forums, tutorials, and collaborative opportunities.
+                            </p>
+                            <div className="pt-4">
+                                <BannerBtn label="Explore"></BannerBtn>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="relative">
+                    <img src={img4} className="object-center" />
+                    <div className="absolute top-1/4 left-2/4 -translate-x-[50%] bg-black bg-opacity-70 p-10 w-full md:w-3/4 lg:w-1/2">
+                        <div className="space-y-5">
+                            <h2 className="text-3xl md:text-4xl lg:text-6xl text-white font-bold">
+                                Tech Web <span className="text-[#0ae0b8]">Apps</span>
+                            </h2>
+                            <p className="text-white opacity-80">
+                                TechConnect is a dynamic web app that connects tech enthusiasts and professionals through forums, tutorials, and collaborative opportunities.
+                            </p>
+                            <div className="pt-4">
+                                <BannerBtn label="Explore"></BannerBtn>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="relative">
+                    <img src={img5} className="object-center" />
+                    <div className="absolute top-1/4 left-2/4 -translate-x-[50%] bg-black bg-opacity-70 p-10 w-full md:w-3/4 lg:w-1/2">
+                        <div className="space-y-5">
+                            <h2 className="text-3xl md:text-4xl lg:text-6xl text-white font-bold">
+                                Tech Web <span className="text-[#0ae0b8]">Apps</span>
+                            </h2>
+                            <p className="text-white opacity-80">
+                                TechConnect is a dynamic web app that connects tech enthusiasts and professionals through forums, tutorials, and collaborative opportunities.
+                            </p>
+                            <div className="pt-4">
+                                <BannerBtn label="Explore"></BannerBtn>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </Carousel>
         </div>
