@@ -35,13 +35,13 @@ Tech App offers role-based dashboards where admins manage users and roles, moder
 - dotenv
 
 ### Technologies Used Server Side
--Node Js
--Express Js
--MongoDB
+- Node Js
+- Express Js
+- MongoDB
 
 ### Hosting: 
--Server Sede Hosting: Vercel
--Client Side Hosting: Firebase
+- Server Sede Hosting: Vercel
+- Client Side Hosting: Firebase
 
 
 
