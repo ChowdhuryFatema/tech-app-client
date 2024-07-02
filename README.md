@@ -29,8 +29,6 @@ Tech App offers role-based dashboards where admins manage users and roles, moder
 - Sweetalert2
 - React toastify
 - Firebase
-- express
-- MongoDB
 - cors
 - dotenv
 
