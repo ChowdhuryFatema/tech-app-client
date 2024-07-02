@@ -43,10 +43,38 @@ Tech App offers role-based dashboards where admins manage users and roles, moder
 - Server Sede Hosting: Vercel
 - Client Side Hosting: Firebase
 
+### Installation
+Clone the repository:
+
 ### Make sure you have the following installed:
 - Node.js
 - npm
 - Git
+
+- git clone https://github.com/your-username/your-repository.git
+- cd your-repository
+- Install dependencies:
+
+#### For the client side:
+- cd client
+- npm install
+- 
+#### For the server side:
+- cd server
+- npm install
+- Set up environment variables:
+
+- Create a .env file in the server directory and add your MongoDB connection string and any other necessary environment variables.
+- Create a .env file in the client directory and add your Firebase configuration and any other necessary environment variables.
+- Running the Application
+
+#### Start the server:
+cd server
+nodemon index.js
+
+#### Start the client:
+cd client
+npm run dev
 
 
 
