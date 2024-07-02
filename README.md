@@ -42,13 +42,13 @@ Tech App offers role-based dashboards where admins manage users and roles, moder
 - Client Side Hosting: Firebase
 
 ### Installation
-Clone the repository:
 
-### Make sure you have the following installed:
+#### Make sure you have the following installed:
 - Node.js
 - npm
 - Git
-
+- 
+#### Clone the repository:
 - git clone https://github.com/ChowdhuryFatema/tech-app-client.git
 - cd your-repository
 - Install dependencies:
@@ -56,7 +56,7 @@ Clone the repository:
 #### For the client side:
 - cd client
 - npm install
-- 
+ 
 #### For the server side:
 - cd server
 - npm install
@@ -67,12 +67,21 @@ Clone the repository:
 - Running the Application
 
 #### Start the server:
-cd server
-nodemon index.js
+- cd server
+- nodemon index.js
 
 #### Start the client:
-cd client
-npm run dev
+- cd client
+- npm run dev
+
+
+
+
+
+
+
+
+
 
 
 
