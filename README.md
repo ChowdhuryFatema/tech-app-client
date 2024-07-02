@@ -43,6 +43,11 @@ Tech App offers role-based dashboards where admins manage users and roles, moder
 - Server Sede Hosting: Vercel
 - Client Side Hosting: Firebase
 
+### Make sure you have the following installed:
+- Node.js
+- npm
+- Git
+
 
 
 
