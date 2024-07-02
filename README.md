@@ -49,7 +49,7 @@ Clone the repository:
 - npm
 - Git
 
-- git clone https://github.com/your-username/your-repository.git
+- git clone https://github.com/ChowdhuryFatema/tech-app-client.git
 - cd your-repository
 - Install dependencies:
 
