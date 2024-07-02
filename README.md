@@ -17,6 +17,32 @@ Tech App offers role-based dashboards where admins manage users and roles, moder
 
 - Coupon codes on the home page offer subscription discounts, promoting user engagement and flexible promotional strategies.
 
+ ### Technology Used Client Side:
+- Tailwind CSS
+- DaisyUI & Mamba UI
+- React router dom
+- React icons
+- Tanstack/react-query
+- React-hook-form
+- React loader spinner
+- Prop types
+- Sweetalert2
+- React toastify
+- Firebase
+- express
+- MongoDB
+- cors
+- dotenv
+
+### Technologies Used Server Side
+-Node Js
+-Express Js
+-MongoDB
+
+### Hosting: 
+-Server Sede Hosting: Vercel
+-Client Side Hosting: Firebase
+
 
 
 
